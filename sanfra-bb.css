@@ -1,1 +1,13 @@
 /* CSS declarations go here */
+.pi {
+	margin-left: 21%;
+}
+
+.ca {
+	margin-left: 46%;
+}
+
+.campo {
+	height: 654px;
+	background: url(/images/field1.jpg) top no-repeat;
+}

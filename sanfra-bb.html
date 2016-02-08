@@ -3,13 +3,91 @@
 </head>
 
 <body>
-  <h1>San Francisco</h1>
-  <h2>Liga Costarricense Beisbol Máster</h2>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<h1>San Francisco</h1>
+			<p>Liga Costarricense Beisbol Máster</p>
+		</div>	
+	</div>
 
-  {{> hello}}
+	<div class="container">
+		<div class="campo">
+			<div class="row">
+				{{#each fielders}}
+					{{>top}}
+				{{/each}}
+			</div>
+			<div class="row">
+				{{#each toppers}}
+					{{>midTop}}
+				{{/each}}				
+			</div>
+			<div class="row">
+				{{#each bottomers}}
+					{{>midBot}}
+				{{/each}}
+			</div>
+			<div class="row">
+				{{#each catcher}}
+					{{>bot}}
+				{{/each}}
+			</div>
+		</div>
+
+		<table class="scoreboard table">
+			<caption>Entrada actual: #{{numIn}} {{upDown}}, Outs: {{outs}}</caption>
+			<thead>
+				<tr>
+					<th>Entrada</th>
+					<th>#1</th>
+					<th>#2</th>
+					<th>#3</th>
+					<th>#4</th>
+					<th>#5</th>
+					<th>#6</th>
+					<th>#7</th>
+					<th>#8</th>
+					<th>#9</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each teams}}
+					{{>scores}}
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="top">
+	<p class="{{clase}}"> {{name}} </p>
+</template>
+
+<template name="midTop">
+	<p class="{{clase}}"> {{name}} </p>
+</template>
+
+<template name="midBot">
+	<p class="{{clase}}"> {{name}} </p>
+</template>
+
+<template name="bot">
+	<p class="{{clase}}"> {{name}} </p>
+</template>
+
+<template name="scores">
+	<tr>
+		<th scope="row">{{name}}</th>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<td>0</td>
+		<th scope="row">0</th>
+	</tr>
 </template>
