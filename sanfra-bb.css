@@ -1,13 +1,61 @@
 /* CSS declarations go here */
-.pi {
-	margin-left: 21%;
-}
-
-.ca {
-	margin-left: 46%;
-}
-
 .campo {
 	height: 654px;
 	background: url(/images/field1.jpg) top no-repeat;
+}
+
+.navbar-brand > img {
+	display: inline;
+	padding: 0 0 5px 40px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	padding-top: 40px;
+}
+
+.navbar {
+	height: 100px;
+}
+
+.top {
+	margin-top: 85px;
+}
+
+.midBot {
+	margin-top: 129px;
+}
+
+.lef {
+	margin: 217px 0 0 226px;
+}
+
+.crf {
+	margin-left: 157px;
+}
+
+.rif {
+	margin-top: 217px;
+}
+
+.ba3 {
+	margin-left: 400px;
+}
+
+.ba2 {
+	margin-left: 15px;
+}
+
+.pit {
+	margin-left: 50px;
+}
+
+.ba1 {
+	margin-left: 20px;
+}
+
+.bot {
+	margin-top: 120px;
+}
+.cat {
+	margin-left: 550px;
 }

@@ -1,16 +1,31 @@
 <head>
-  <title>San Francisco</title>
+  <title>San Francisco - Liga Costarricense Beisbol Máster</title>
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="jumbotron">
-			<h1>San Francisco</h1>
-			<p>Liga Costarricense Beisbol Máster</p>
-		</div>	
-	</div>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#"> <img class="logo" src="/images/sf_logo.jpg"> <span>San Francisco Máster</span></a>
+	    </div>
 
-	<div class="container">
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">Historia</a></li>
+	        <li><a href="#">Miembros</a></li>
+	        <li><a href="#">Partidos Pasados</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="container cuerpo">
 		<div class="campo">
 			<div class="row">
 				{{#each fielders}}
@@ -59,35 +74,3 @@
 		</table>
 	</div>
 </body>
-
-<template name="top">
-	<p class="{{clase}}"> {{name}} </p>
-</template>
-
-<template name="midTop">
-	<p class="{{clase}}"> {{name}} </p>
-</template>
-
-<template name="midBot">
-	<p class="{{clase}}"> {{name}} </p>
-</template>
-
-<template name="bot">
-	<p class="{{clase}}"> {{name}} </p>
-</template>
-
-<template name="scores">
-	<tr>
-		<th scope="row">{{name}}</th>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<td>0</td>
-		<th scope="row">0</th>
-	</tr>
-</template>

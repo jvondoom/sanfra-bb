@@ -3,43 +3,43 @@ if (Meteor.isClient) {
   Template.body.helpers({
     fielders: [
       { name: "Jardinero Izq.",
-        clase: "lf col-md-1 col-xs-1" 
+        clase: "lef col-md-1 col-md-offset-2" 
       }, 
       { name: "Jardinero CenI",
-        clase: "cf col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "clf col-md-1 col-md-offset-1"
       }, 
       { name: "Jardinero CenD",
-        clase: "cf col-md-1 col-md-offset-4 col-xs-1 col-xs-offset-4"
+        clase: "crf col-md-1 col-md-offset-2"
       }, 
       { name: "Jardinero Der.",
-        clase: "rf col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "rif col-md-1 col-md-offset-1"
       }
     ], 
 
     toppers: [
       { name: "Shortstop",
-        clase: "ss col-md-1 col-md-offset-4 col-xs-1 col-xs-offset-4"
+        clase: "shs col-md-1 col-md-offset-5"
       },
       { name: "2nda Base",
-        clase: "2b col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "ba2 col-md-1"
       }
     ],
 
     bottomers: [
       { name: "3era Base",
-        clase: "3b col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "ba3 col-md-1 col-md-offset-4"
       }, 
       { name: "Pitcher",
-        clase: "pi col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "pit col-md-1"
       },
       { name: "1era Base",
-        clase: "1b col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2"
+        clase: "ba1 col-md-1"
       }
     ],
       
     catcher: [ 
       { name: "Catcher",
-        clase: "ca col-md-1 col-md-offset-6 col-xs-1 col-xs-offset-6"
+        clase: "cat col-md-1 col-md-offset-5"
       }
     ], 
 
