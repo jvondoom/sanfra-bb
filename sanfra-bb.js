@@ -1,55 +1,155 @@
 if (Meteor.isClient) {
   // This code only runs on the client
   Template.body.helpers({
-    fielders: [
-      { name: "Jardinero Izq.",
-        clase: "lef col-md-1 col-md-offset-2" 
+    matches: [
+      { date: "13/2",
+        teamHome: "San Francisco",
+        teamVisit: "Aguilas",
+        inActual: 2,
+        upDown: "arriba",
+        outs: 2,
+        totalScoreHome: 2,
+        totalScoreVisit: 2,
+        scoreHome: [
+          { num: 1,
+            score: 0
+          },
+          { num: 2,
+            score: 1
+          },
+          { num: 3,
+            score: 1
+          },
+          { num: 4,
+            score: ""
+          },
+          { num: 5,
+            score: ""
+          },
+          { num: 6,
+            score: ""
+          },
+          { num: 7,
+            score: ""
+          },
+          { num: 8,
+            score: ""
+          },
+          { num: 9,
+            score: ""
+          }
+        ], 
+        scoreVisit: [
+          { num: 1,
+            score: 2
+          },
+          { num: 2, 
+            score: 0
+          },
+          { num: 3, 
+            score: ""
+          },
+          { num: 4,
+            score: ""
+          },
+          { num: 5,
+            score: ""
+          },
+          { num: 6,
+            score: ""
+          },
+          { num: 7,
+            score: ""
+          },
+          { num: 8,
+            score: ""
+          },
+          { num: 9,
+            score: ""
+          }
+        ]
       }, 
-      { name: "Jardinero CenI",
-        clase: "clf col-md-1 col-md-offset-1"
-      }, 
-      { name: "Jardinero CenD",
-        clase: "crf col-md-1 col-md-offset-2"
-      }, 
-      { name: "Jardinero Der.",
-        clase: "rif col-md-1 col-md-offset-1"
+      { date: "6/2",
+        teamHome: "San Francisco",
+        teamVisit: "Veteranos",
+        inActual: 2,
+        upDown: "arriba",
+        outs: 2,
+        totalScoreHome: 8,
+        totalScoreVisit: 13,
+        scoreHome: [
+          { num: 1,
+            score: 0
+          },
+          { num: 2,
+            score: 1
+          },
+          { num: 3,
+            score: 1
+          },
+          { num: 4,
+            score: 1
+          },
+          { num: 5,
+            score: 1
+          },
+          { num: 6,
+            score: 1
+          },
+          { num: 7,
+            score: 1
+          },
+          { num: 8,
+            score: 1
+          },
+          { num: 9,
+            score: 1
+          }
+        ], 
+        scoreVisit: [
+          { num: 1,
+            score: 2
+          },
+          { num: 2, 
+            score: 0
+          },
+          { num: 3, 
+            score: 5
+          },
+          { num: 4,
+            score: 1
+          },
+          { num: 5,
+            score: 1
+          },
+          { num: 6,
+            score: 1
+          },
+          { num: 7,
+            score: 1
+          },
+          { num: 8,
+            score: 1
+          },
+          { num: 9,
+            score: 1
+          }
+        ]
       }
-    ], 
+    ]
+  });
 
-    toppers: [
-      { name: "Shortstop",
-        clase: "shs col-md-1 col-md-offset-5"
-      },
-      { name: "2nda Base",
-        clase: "ba2 col-md-1"
+  Template.match.onRendered(function () {
+    $('.match-info').hide();
+  });
+
+  Template.match.events({
+    'click .match-header': function (e) {
+      $('.match-info').slideUp('normal');
+      if ($(e.currentTarget).next().is(':hidden') === true) {
+        $(e.currentTarget).next().slideDown('normal');
       }
-    ],
-
-    bottomers: [
-      { name: "3era Base",
-        clase: "ba3 col-md-1 col-md-offset-4"
-      }, 
-      { name: "Pitcher",
-        clase: "pit col-md-1"
-      },
-      { name: "1era Base",
-        clase: "ba1 col-md-1"
-      }
-    ],
-      
-    catcher: [ 
-      { name: "Catcher",
-        clase: "cat col-md-1 col-md-offset-5"
-      }
-    ], 
-
-    teams: [
-      {name: "San Francisco"}, 
-      {name: "Aguilas"}
-    ], 
-
-    numIn: 2, 
-    upDown: "arriba", 
-    outs: 2
+      return false;
+    }
   });
 }

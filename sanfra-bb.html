@@ -12,65 +12,30 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#"> <img class="logo" src="/images/sf_logo.jpg"> <span>San Francisco Máster</span></a>
+	      <a class="navbar-brand" href="#">San Francisco</a>
 	    </div>
 
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">Historia</a></li>
+	      	<li><a href="#matches">Partidos</a></li>	    
 	        <li><a href="#">Miembros</a></li>
-	        <li><a href="#">Partidos Pasados</a></li>
+	        <li><a href="#">Historia</a></li>
 	      </ul>
 	    </div>
 	  </div>
 	</nav>
 
-	<div class="container cuerpo">
-		<div class="campo">
-			<div class="row">
-				{{#each fielders}}
-					{{>top}}
-				{{/each}}
-			</div>
-			<div class="row">
-				{{#each toppers}}
-					{{>midTop}}
-				{{/each}}				
-			</div>
-			<div class="row">
-				{{#each bottomers}}
-					{{>midBot}}
-				{{/each}}
-			</div>
-			<div class="row">
-				{{#each catcher}}
-					{{>bot}}
-				{{/each}}
-			</div>
-		</div>
+	<div class="logo text-center">
+		<img src="/images/sf.png" alt="San Francisco">
+		<h1>Liga Costarricense de Béisbol Máster</h1>
+	</div>
 
-		<table class="scoreboard table">
-			<caption>Entrada actual: #{{numIn}} {{upDown}}, Outs: {{outs}}</caption>
-			<thead>
-				<tr>
-					<th>Entrada</th>
-					<th>#1</th>
-					<th>#2</th>
-					<th>#3</th>
-					<th>#4</th>
-					<th>#5</th>
-					<th>#6</th>
-					<th>#7</th>
-					<th>#8</th>
-					<th>#9</th>
-					<th>Total</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each teams}}
-					{{>scores}}
-				{{/each}}
-			</tbody>
-		</table>
+	<div class="container matches" id="matches">
+		<div class="page-header">
+			<h1>Partidos <small>Liga Verano 2016</small></h1>
+		</div>
+		{{#each matches}}
+			{{>match }}
+		{{/each}}
 	</div>
 </body>

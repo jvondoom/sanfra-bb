@@ -1,61 +1,58 @@
 /* CSS declarations go here */
-.campo {
-	height: 654px;
-	background: url(/images/field1.jpg) top no-repeat;
+body {
+	background: #f0f0f0;
+}
+.cuerpo {
+	background: #fd5a1e;
+
 }
 
-.navbar-brand > img {
-	display: inline;
-	padding: 0 0 5px 40px;
+.navbar-default {
+	background-color: #f0f0f0;
+	border-color: #ccc;
 }
 
 .navbar-default .navbar-nav > li > a {
-	padding-top: 40px;
+	color: #000;
+}
+
+.navbar-default .navbar-brand {
+	color: #000;
 }
 
 .navbar {
-	height: 100px;
+	border-radius: 0;
+	color: #000;
 }
 
-.top {
-	margin-top: 85px;
+.table > thead > tr > th {
+	border-bottom: 2px solid #fd5a1e;
 }
 
-.midBot {
-	margin-top: 129px;
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+	border-top: 1px solid #fd5a1e;
 }
 
-.lef {
-	margin: 217px 0 0 226px;
+.match {
+	height: 200px;
+	margin-bottom: 3%;
 }
 
-.crf {
-	margin-left: 157px;
+.match-header {
+	background: #fd5a1e;
+	height: 20%;
+	color: #fff;
+}
+.match-header h3 {
+	padding-top: 5px;
 }
 
-.rif {
-	margin-top: 217px;
+.match-info {
+	background: #dfdfdf;
+	height: 80%;
 }
 
-.ba3 {
-	margin-left: 400px;
-}
-
-.ba2 {
-	margin-left: 15px;
-}
-
-.pit {
-	margin-left: 50px;
-}
-
-.ba1 {
-	margin-left: 20px;
-}
-
-.bot {
-	margin-top: 120px;
-}
-.cat {
-	margin-left: 550px;
+a {
+	color: #000;
+	padding-right: 5%;
 }
