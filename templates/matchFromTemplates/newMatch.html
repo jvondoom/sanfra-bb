@@ -1,0 +1,27 @@
+<template name="newMatch">
+	<div class="page-header">
+		<h2><small>Nuevo Partido</small></h2>
+	</div>
+
+	<form class="new-match form-inline text-center">
+		<div class="form-group" id="other-team">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Equipo Contrario</span>
+				<input type="text" class="form-control in-actual"  name="otherTeam" aria-describedby="basic-addon1">
+				
+			</div>
+			<span id="helpBlock1" class="help-block hidden">El nombre del equipo no puede quedar en blanco.</span>
+		</div>
+		<div class="form-group" id="home-visit">
+			<div class="input-group">
+				<label class="radio-inline"><input type="radio" name="homeVisit" value="home" >Casa</label>
+				<label class="radio-inline"><input type="radio" name="homeVisit" value="visit">Visita</label>
+			</div>
+			<span id="helpBlock2" class="help-block hidden">Seleccione una opción.</span>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-default">Comenzar</button>
+		</div>
+		
+	</form>
+</template>

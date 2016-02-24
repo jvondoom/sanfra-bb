@@ -1,28 +1,94 @@
 /* CSS declarations go here */
+html {
+	height: 100%;
+}
+
 body {
-	background: #f0f0f0;
+	background: #f7f7f9;
+	width: 100%;
+	height: 100%;
 }
 .cuerpo {
 	background: #fd5a1e;
 
 }
 
-.navbar-default {
-	background-color: #f0f0f0;
-	border-color: #ccc;
+.logo {
+	padding-top: 2%;
+	margin-bottom: 5%;
 }
 
-.navbar-default .navbar-nav > li > a {
-	color: #000;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	background: #f7f7f9;
+	color: #fd5a1e;
+	font-weight: bold;
 }
 
-.navbar-default .navbar-brand {
-	color: #000;
+a {
+	color: #fd5a1e;
 }
 
-.navbar {
-	border-radius: 0;
-	color: #000;
+a:hover, a:focus {
+	color: #fd5a1e;
+}
+.matchForm {
+	background: #f7f7f9;
+	border: 1px solid #fd5a1e;
+	border-radius: 25px;
+	margin-bottom: 3%;
+}
+
+.matches {
+	background: #f7f7f9;
+	border: 1px solid #fd5a1e;
+	border-radius: 25px;
+	margin-bottom: 3%;
+}
+
+.page-header {
+	border-bottom: 2px solid #fd5a1e;
+}
+
+.progress {
+	margin-bottom: 0;
+	background-color: #dfdfdf;
+}
+
+.progress-bar {
+	background-color: #fd5a1e;
+}
+
+.outs p {
+	font-weight: bold;
+}
+
+.match {
+	margin-bottom: 3%;
+}
+
+.match-header {
+	background: #fd5a1e;
+	height: 20%;
+	color: #fff;
+	border-radius: 10px 10px 0 0;
+}
+
+.match-header h3 {
+	padding-top: 5px;
+}
+
+.match-info {
+	background: #dfdfdf;
+	height: 80%;
+	border-radius: 0 0 10px 10px;
+	overflow: auto;
+}
+
+.match-info-on {
+	background: #dfdfdf;
+	height: 80%;
+	border-radius: 0 0 10px 10px;
+	overflow: auto;
 }
 
 .table > thead > tr > th {
@@ -31,28 +97,4 @@ body {
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	border-top: 1px solid #fd5a1e;
-}
-
-.match {
-	height: 200px;
-	margin-bottom: 3%;
-}
-
-.match-header {
-	background: #fd5a1e;
-	height: 20%;
-	color: #fff;
-}
-.match-header h3 {
-	padding-top: 5px;
-}
-
-.match-info {
-	background: #dfdfdf;
-	height: 80%;
-}
-
-a {
-	color: #000;
-	padding-right: 5%;
 }

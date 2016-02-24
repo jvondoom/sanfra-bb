@@ -1,43 +1,40 @@
 <template name="match">
 	<div class="match">
 		<div class="match-header">
-			<h3 class="text-center">[{{date}}] {{teamHome}} {{totalScoreHome}} - {{teamVisit}} {{totalScoreVisit}} </h3>
+			<h3 class="text-center">[{{formatDate date}}] {{teamHome}} {{totalScoreHome}} - {{teamVisit}} {{totalScoreVisit}}</h3>
 		</div>
-		<div class="match-info">
-		<table class="table">
-		    <thead>
-		      <tr>
-		        <th>Entrada</th>
-		        <th>#1</th>
-		        <th>#2</th>
-		        <th>#3</th>
-		        <th>#4</th>
-		        <th>#5</th>
-		        <th>#6</th>
-		        <th>#7</th>
-		        <th>#8</th>
-		        <th>#9</th>
-		        <th>Total</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-		        <th>{{teamHome}}</th>
-		        {{#each scoreHome}}
-		        	<td>{{score}}</td>
-		        {{/each}}
-		        <th>{{totalScoreHome}}</th>
-		      </tr>
-		      <tr>
-		        <th>{{teamVisit}}</th>
-		        {{#each scoreVisit}}
-		        	<td>{{score}}</td>
-		        {{/each}}
-		        <th>{{totalScoreVisit}}</th>
-		      </tr>
-		    </tbody>
-		  </table>
-		  <p class="text-right" ><a href="#">Ver alineación</a></p>
+		<div class=" {{#if ended}}
+		    match-info
+		  {{else}}
+		    match-info-on
+		  {{/if}} ">
+			<table class="table">
+			    <thead>
+			      <tr>
+			        <th>Entrada</th>
+			        {{#each scoreVisit}}
+			        	<th>#{{num}}</th>
+			        {{/each}}
+			        <th>Total</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <th>{{teamVisit}}</th>
+			        {{#each scoreVisit}}
+			        	<td>{{score}}</td>
+			        {{/each}}
+			        <th>{{totalScoreVisit}}</th>
+			      </tr>
+			      <tr>
+			        <th>{{teamHome}}</th>
+			        {{#each scoreHome}}
+			        	<td>{{score}}</td>
+			        {{/each}}
+			        <th>{{totalScoreHome}}</th>
+			      </tr>
+			    </tbody>
+			</table>
 		</div>
 	</div>
 </template>

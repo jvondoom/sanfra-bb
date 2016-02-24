@@ -1,142 +1,25 @@
+Matches = new Mongo.Collection("matches");
+ActualMatch = new Mongo.Collection("matchValues");
+
+
 if (Meteor.isClient) {
   // This code only runs on the client
+
   Template.body.helpers({
-    matches: [
-      { date: "13/2",
-        teamHome: "San Francisco",
-        teamVisit: "Aguilas",
-        inActual: 2,
-        upDown: "arriba",
-        outs: 2,
-        totalScoreHome: 2,
-        totalScoreVisit: 2,
-        scoreHome: [
-          { num: 1,
-            score: 0
-          },
-          { num: 2,
-            score: 1
-          },
-          { num: 3,
-            score: 1
-          },
-          { num: 4,
-            score: ""
-          },
-          { num: 5,
-            score: ""
-          },
-          { num: 6,
-            score: ""
-          },
-          { num: 7,
-            score: ""
-          },
-          { num: 8,
-            score: ""
-          },
-          { num: 9,
-            score: ""
-          }
-        ], 
-        scoreVisit: [
-          { num: 1,
-            score: 2
-          },
-          { num: 2, 
-            score: 0
-          },
-          { num: 3, 
-            score: ""
-          },
-          { num: 4,
-            score: ""
-          },
-          { num: 5,
-            score: ""
-          },
-          { num: 6,
-            score: ""
-          },
-          { num: 7,
-            score: ""
-          },
-          { num: 8,
-            score: ""
-          },
-          { num: 9,
-            score: ""
-          }
-        ]
-      }, 
-      { date: "6/2",
-        teamHome: "San Francisco",
-        teamVisit: "Veteranos",
-        inActual: 2,
-        upDown: "arriba",
-        outs: 2,
-        totalScoreHome: 8,
-        totalScoreVisit: 13,
-        scoreHome: [
-          { num: 1,
-            score: 0
-          },
-          { num: 2,
-            score: 1
-          },
-          { num: 3,
-            score: 1
-          },
-          { num: 4,
-            score: 1
-          },
-          { num: 5,
-            score: 1
-          },
-          { num: 6,
-            score: 1
-          },
-          { num: 7,
-            score: 1
-          },
-          { num: 8,
-            score: 1
-          },
-          { num: 9,
-            score: 1
-          }
-        ], 
-        scoreVisit: [
-          { num: 1,
-            score: 2
-          },
-          { num: 2, 
-            score: 0
-          },
-          { num: 3, 
-            score: 5
-          },
-          { num: 4,
-            score: 1
-          },
-          { num: 5,
-            score: 1
-          },
-          { num: 6,
-            score: 1
-          },
-          { num: 7,
-            score: 1
-          },
-          { num: 8,
-            score: 1
-          },
-          { num: 9,
-            score: 1
-          }
-        ]
-      }
-    ]
+    matches: function () {
+      return Matches.find({}, {sort: {date: -1}});
+    },
+
+    actualMatch: function () {
+      return ActualMatch.find({});
+    }
+  });
+
+  Template.body.events({
+    'click .navig-item': function (e) {
+      $('li.active').attr('class', 'navig-item');
+      e.currentTarget.className = "navig-item active";
+    }
   });
 
   Template.match.onRendered(function () {
@@ -152,4 +35,167 @@ if (Meteor.isClient) {
       return false;
     }
   });
+
+  Template.matchSettings.events({
+    'change .score-settings': function (e) {
+      e.preventDefault();
+
+      var txtRuns = $(e.currentTarget).find("input[name=runs]")[0];
+      var txtOuts = $(e.currentTarget).find("input[name=outs]")[0];
+      
+      var docID = Matches.findOne({"ended" : false});
+      var strSH = "";
+
+      if (this.upDown == "Arriba") {
+        strSH = 'scoreVisit.' + (this.inActual - 1) + '.score';
+      }
+      else {
+        strSH = 'scoreHome.' + (this.inActual - 1) + '.score';
+      }
+
+      Matches.update({ 
+            _id:docID._id 
+          }, 
+          { $set: JSON.parse('{"'+strSH+'" : '+txtRuns.value+'}') }
+      );
+
+      ActualMatch.update(
+        { _id: this._id }, 
+        { $set: { "outs" : parseInt( txtOuts.value ) } }
+      );
+    }, 
+
+    'click .new-half': function (e) {
+      e.preventDefault();
+
+      if (this.upDown == "Arriba"){
+        ActualMatch.update(
+          { _id: this._id }, 
+          { $set: { "upDown" : "Abajo" } }
+        );
+      }
+      else{
+        var nextIn = this.inActual + 1;
+
+        ActualMatch.update(
+          { _id: this._id }, 
+          { $set: { "upDown" : "Arriba",
+                   "inActual" : nextIn } }
+        );
+      }
+    },
+
+    'click .end-game': function (e) {
+      e.preventDefault();
+
+      Matches.update({_id:Matches.findOne({"ended" : false})['_id']}, 
+                     {$set: { "ended" : true}});
+    }
+  });
+
+  Template.newMatch.events({
+    'submit .new-match': function (e) {
+      e.preventDefault();
+
+      var optHomeVisit = $(e.currentTarget).find("input[name=homeVisit]:checked")[0];
+      var otherTeam = $(e.currentTarget).find("input[name=otherTeam]")[0];
+      var errorOtherTeam = $(e.currentTarget).find('#other-team')[0];
+      var errorHelp1 =  $(e.currentTarget).find('#helpBlock1')[0];
+      var errorHomeVisit = $(e.currentTarget).find('#home-visit')[0];
+      var errorHelp2 =  $(e.currentTarget).find('#helpBlock2')[0];
+      var txtTeamHome = "";
+      var txtTeamVisit = "";
+
+      if (otherTeam.value == "" || typeof optHomeVisit === "undefined") {
+        if (otherTeam.value == "") {
+          errorOtherTeam.className = "form-group has-error";
+          errorHelp1.className = "help-block";
+        }
+        else {
+          errorOtherTeam.className = "form-group";
+          errorHelp1.className = "help-block hidden";
+        }
+
+        if (typeof optHomeVisit === "undefined") {
+          errorHomeVisit.className = "form-group has-error";
+          errorHelp2.className = "help-block";
+        }
+        else {
+          errorHomeVisit.className = "form-group";
+          errorHelp2.className = "help-block hidden";
+        }
+      }
+      else {
+        errorOtherTeam.className = "form-group";
+        errorHelp1.className = "help-block hidden";
+        errorHomeVisit.className = "form-group";
+        errorHelp2.className = "help-block hidden";
+
+        if (optHomeVisit.value == "home") {
+          txtTeamHome = otherTeam.value;
+          txtTeamVisit = "San Francisco";
+        }
+        else if (optHomeVisit.value == "visit" ) {
+          txtTeamVisit = otherTeam.value;
+          txtTeamHome = "San Francisco";
+        }
+
+        Matches.insert({
+          date: new Date(), 
+          teamHome: txtTeamHome,
+          teamVisit: txtTeamVisit,
+          totalScoreHome: 0,
+          totalScoreVisit: 0,
+          ended: false,
+          scoreHome: [
+                        { num: 1, score: null},
+                        { num: 2, score: null},
+                        { num: 3, score: null},
+                        { num: 4, score: null},
+                        { num: 5, score: null},
+                        { num: 6, score: null},
+                        { num: 7, score: null},
+                        { num: 8, score: null},
+                        { num: 9, score: null}
+                    ], 
+          scoreVisit: [
+                        { num: 1, score: null},
+                        { num: 2, score: null},
+                        { num: 3, score: null},
+                        { num: 4, score: null},
+                        { num: 5, score: null},
+                        { num: 6, score: null},
+                        { num: 7, score: null},
+                        { num: 8, score: null},
+                        { num: 9, score: null}
+                    ]
+        });
+
+        ActualMatch.update({
+                            _id:ActualMatch.findOne({idMV:0})['_id'] }, 
+                           {$set: {
+                                    inActual: 1,
+                                    upDown: "Arriba",
+                                    outs: 0
+                                  }
+                          });
+      }
+    }
+  });
+
+  Template.registerHelper('per', function (inActual) {
+    var p = $(this)[0].inActual * 100 / 9;
+
+    if (p > 100 ) {
+      return 100;
+    }
+    else{
+      return p;
+    }
+  });
+
+  Template.registerHelper('formatDate', function(date) {
+    return date.toLocaleDateString();
+  });
+
 }
