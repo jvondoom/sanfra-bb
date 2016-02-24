@@ -171,14 +171,25 @@ if (Meteor.isClient) {
                     ]
         });
 
-        ActualMatch.update({
-                            _id:ActualMatch.findOne({idMV:0})['_id'] }, 
-                           {$set: {
-                                    inActual: 1,
-                                    upDown: "Arriba",
-                                    outs: 0
-                                  }
-                          });
+        var flagAM = ActualMatch.findOne({idMV:0})
+
+        if (flagAM === undefined) {
+          ActualMatch.insert({
+              inActual: 1,
+              upDown: "Arriba",
+              outs: 0});
+        }
+        else {
+          ActualMatch.update({
+            _id:flagAM['_id'] }, 
+           {$set: {
+              inActual: 1,
+              upDown: "Arriba",
+              outs: 0
+            }
+          });
+        }
+        
       }
     }
   });

@@ -31,9 +31,9 @@ db.matches.insert({
 });
 
 db.matchValues.insert({
-  inActual: 3,
-  upDown: "arriba",
-  outs: 2
+  inActual: 1,
+  upDown: "Arriba",
+  outs: 0
 });
 
 db.matchValues.update(
