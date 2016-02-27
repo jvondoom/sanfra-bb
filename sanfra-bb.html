@@ -4,7 +4,7 @@
 </head>
 
 <body>
-	
+
 	{{>navigation }}
 
 	<div class="logo text-center">
@@ -12,17 +12,23 @@
 		<h1>Liga Costarricense de Béisbol Máster</h1>
 	</div>
 
-	
-	<div class="container matchForm" id="matchForm">
-		<ul class="nav nav-pills nav-justified">
-		  <li role="presentation" class="navig-item"><a href="#matchForm">Marcardor Partido</a></li>
-		  <li role="presentation" class="navig-item"><a href="#matchForm">Nuevo Partido</a></li>
-		</ul>
-		{{#each actualMatch}}
-			{{>matchSettings}}
-		{{/each}}
-		{{>newMatch}}
-	</div>
+
+	{{#if currentUser}}
+		<div class="container matchForm" id="matchForm">
+			<ul class="nav nav-pills nav-justified">
+			  <li role="presentation" class="navig-item" id="mForm1"><a href="#matchForm">Marcardor Partido</a></li>
+			  <li role="presentation" class="navig-item" id="mForm2"><a href="#matchForm">Nuevo Partido</a></li>
+			</ul>
+			<div class="mForm1">
+				{{#each actualMatch}}
+					{{>matchSettings}}
+				{{/each}}
+			</div>
+			<div class="mForm2">
+				{{>newMatch}}
+			</div>
+		</div>	
+	{{/if}}	
 
 	<div class="container matches" id="matches">
 		<div class="page-header">

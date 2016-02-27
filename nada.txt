@@ -47,3 +47,16 @@ db.mycollection.update(
 )
 
 {$elemMatch : {"merchantId" : MERCHANTID}
+
+db.matches.aggregate(
+    [
+        { $match: {"ended" : false} },
+        { $unwind: '$scoreHome'}, 
+        { $group: 
+            {
+                _id: "z",
+                "total": { $sum: "$scoreHome.score" }
+            }
+        }
+    ]
+)

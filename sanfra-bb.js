@@ -1,6 +1,113 @@
 Matches = new Mongo.Collection("matches");
 ActualMatch = new Mongo.Collection("matchValues");
 
+Meteor.methods({
+  'addActualMatch': function (){
+    ActualMatch.insert({
+      idMV: 0,
+      inActual: 1,
+      upDown: "Arriba",
+      outs: 0
+    });
+  }, 
+
+  'modActualMatch': function (idAM, inA, upD, ots){
+    ActualMatch.update(
+      { _id: idAM }, 
+      {$set: {
+        inActual: inA,
+        upDown: upD,
+        outs: ots
+      }
+    });
+  }, 
+
+  'modOuts': function (idAM, ots){
+    ActualMatch.update(
+      { _id: idAM }, 
+      {$set: {
+        outs: ots
+      }
+    });
+  }, 
+
+  'modRuns': function (){
+
+  }, 
+
+  'modNextIn': function (idAM, upD, inA){
+    if (upD == "Arriba"){
+        ActualMatch.update(
+          { _id: idAM }, 
+          { $set: {
+            "upDown" : "Abajo",
+            "outs" : 0 } }
+        );
+      }
+      else{
+        var nextIn = inA + 1;
+
+        ActualMatch.update(
+          { _id: idAM }, 
+          { $set: { 
+            "upDown" : "Arriba",
+            "inActual" : nextIn, 
+            "outs" : 0 } }
+        );
+      }
+  }, 
+
+  'addMatch': function (tmH, tmV) {
+    Matches.insert({
+      date: new Date(), 
+      teamHome: tmH,
+      teamVisit: tmV,
+      totalScoreHome: 0,
+      totalScoreVisit: 0,
+      ended: false,
+      scoreHome: [
+          { num: 1, score: null},
+          { num: 2, score: null},
+          { num: 3, score: null},
+          { num: 4, score: null},
+          { num: 5, score: null},
+          { num: 6, score: null},
+          { num: 7, score: null},
+          { num: 8, score: null},
+          { num: 9, score: null}
+      ], 
+      scoreVisit: [
+          { num: 1, score: null},
+          { num: 2, score: null},
+          { num: 3, score: null},
+          { num: 4, score: null},
+          { num: 5, score: null},
+          { num: 6, score: null},
+          { num: 7, score: null},
+          { num: 8, score: null},
+          { num: 9, score: null}
+      ]
+    });
+  },
+
+  'modEndMatch': function (){
+    Matches.update({
+      _id:Matches.findOne({"ended" : false})['_id']}, 
+      {$set: { 
+        "ended" : true
+      }
+    });
+  }
+});
+
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Accounts.validateNewUser(function (user) {
+    console.log(user.username === "admin");
+    return user.username === "admin";
+  });
+}
+
 
 if (Meteor.isClient) {
   // This code only runs on the client
@@ -19,7 +126,22 @@ if (Meteor.isClient) {
     'click .navig-item': function (e) {
       $('li.active').attr('class', 'navig-item');
       e.currentTarget.className = "navig-item active";
+    }, 
+
+    'click #mForm1': function () {
+      $('.mForm1').show();
+      $('.mForm2').hide();
+    },
+
+    'click #mForm2': function () {
+      $('.mForm2').show();
+      $('.mForm1').hide();
     }
+  });
+
+  Template.body.onRendered(function () {
+    $('.mForm1').hide();
+    $('.mForm2').hide();
   });
 
   Template.match.onRendered(function () {
@@ -46,50 +168,59 @@ if (Meteor.isClient) {
       var docID = Matches.findOne({"ended" : false});
       var strSH = "";
 
-      if (this.upDown == "Arriba") {
-        strSH = 'scoreVisit.' + (this.inActual - 1) + '.score';
-      }
-      else {
-        strSH = 'scoreHome.' + (this.inActual - 1) + '.score';
-      }
-
-      Matches.update({ 
+      if (docID !== undefined) {
+        if (this.upDown == "Arriba") {
+          strSH = 'scoreVisit.' + (this.inActual - 1) + '.score';
+        }
+        else {
+          strSH = 'scoreHome.' + (this.inActual - 1) + '.score';
+        }
+        
+        Matches.update({ 
             _id:docID._id 
           }, 
           { $set: JSON.parse('{"'+strSH+'" : '+txtRuns.value+'}') }
-      );
+        );
 
-      ActualMatch.update(
-        { _id: this._id }, 
-        { $set: { "outs" : parseInt( txtOuts.value ) } }
-      );
+        var i = 1;
+        var sumRuns = 0;
+        strTS = "";
+        if (this.upDown == "Arriba") {
+          strTS = "totalScoreVisit";
+          while (i < this.inActual){
+            sumRuns = sumRuns + docID.scoreVisit[i-1].score;
+            i = i + 1;
+          }
+        }
+        else {
+          strTS = "totalScoreHome";
+          while (i < this.inActual){
+            sumRuns = sumRuns + docID.scoreHome[i-1].score;
+            i = i + 1;
+          }
+        }
+        sumRuns = parseInt(sumRuns) + parseInt(txtRuns.value);
+        Matches.update({ 
+            _id:docID._id 
+          }, 
+          { $set: JSON.parse('{"'+strTS+'" : '+sumRuns+'}') }
+        );
+
+        Meteor.call('modOuts', this._id, txtOuts.value);
+      }
+      
     }, 
 
     'click .new-half': function (e) {
       e.preventDefault();
 
-      if (this.upDown == "Arriba"){
-        ActualMatch.update(
-          { _id: this._id }, 
-          { $set: { "upDown" : "Abajo" } }
-        );
-      }
-      else{
-        var nextIn = this.inActual + 1;
-
-        ActualMatch.update(
-          { _id: this._id }, 
-          { $set: { "upDown" : "Arriba",
-                   "inActual" : nextIn } }
-        );
-      }
+      Meteor.call('modNextIn', this._id, this.upDown, this.inActual);
     },
 
     'click .end-game': function (e) {
       e.preventDefault();
 
-      Matches.update({_id:Matches.findOne({"ended" : false})['_id']}, 
-                     {$set: { "ended" : true}});
+      Meteor.call('modEndMatch');
     }
   });
 
@@ -140,54 +271,15 @@ if (Meteor.isClient) {
           txtTeamHome = "San Francisco";
         }
 
-        Matches.insert({
-          date: new Date(), 
-          teamHome: txtTeamHome,
-          teamVisit: txtTeamVisit,
-          totalScoreHome: 0,
-          totalScoreVisit: 0,
-          ended: false,
-          scoreHome: [
-                        { num: 1, score: null},
-                        { num: 2, score: null},
-                        { num: 3, score: null},
-                        { num: 4, score: null},
-                        { num: 5, score: null},
-                        { num: 6, score: null},
-                        { num: 7, score: null},
-                        { num: 8, score: null},
-                        { num: 9, score: null}
-                    ], 
-          scoreVisit: [
-                        { num: 1, score: null},
-                        { num: 2, score: null},
-                        { num: 3, score: null},
-                        { num: 4, score: null},
-                        { num: 5, score: null},
-                        { num: 6, score: null},
-                        { num: 7, score: null},
-                        { num: 8, score: null},
-                        { num: 9, score: null}
-                    ]
-        });
+        Meteor.call('addMatch', txtTeamHome, txtTeamVisit);
 
         var flagAM = ActualMatch.findOne({idMV:0})
 
         if (flagAM === undefined) {
-          ActualMatch.insert({
-              inActual: 1,
-              upDown: "Arriba",
-              outs: 0});
+          Meteor.call('addActualMatch');
         }
         else {
-          ActualMatch.update({
-            _id:flagAM['_id'] }, 
-           {$set: {
-              inActual: 1,
-              upDown: "Arriba",
-              outs: 0
-            }
-          });
+          Meteor.call('modActualMatch', [flagAM['_id'], 1, "Arriba", 0]);
         }
         
       }
@@ -208,5 +300,8 @@ if (Meteor.isClient) {
   Template.registerHelper('formatDate', function(date) {
     return date.toLocaleDateString();
   });
-
+  
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 }

@@ -38,6 +38,14 @@ a:hover, a:focus {
 	margin-bottom: 3%;
 }
 
+.mForm1 {
+	margin-bottom: 15px;
+}
+
+.mForm2 {
+	margin-bottom: 15px;
+}
+
 .matches {
 	background: #f7f7f9;
 	border: 1px solid #fd5a1e;
