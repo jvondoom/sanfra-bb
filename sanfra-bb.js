@@ -7,7 +7,8 @@ Meteor.methods({
       idMV: 0,
       inActual: 1,
       upDown: "Arriba",
-      outs: 0
+      outs: 0, 
+      ended: false
     });
   }, 
 
@@ -20,7 +21,19 @@ Meteor.methods({
         outs: ots
       }
     });
-  }, 
+  },
+
+  'modActualMatch': function (idAM, inA, upD, ots, ends){
+    ActualMatch.update(
+      { _id: idAM }, 
+      {$set: {
+        inActual: inA,
+        upDown: upD,
+        outs: ots, 
+        ended: ends
+      }
+    });
+  },
 
   'modOuts': function (idAM, ots){
     ActualMatch.update(
@@ -31,12 +44,60 @@ Meteor.methods({
     });
   }, 
 
-  'modRuns': function (){
+  'modRuns': function (idAM, upD, rn, inA){
+    var docID = Matches.findOne({"ended" : false});
 
+    if (upD == "Arriba") {
+      strSH = 'scoreVisit.' + (inA - 1) + '.score';
+    }
+    else {
+      strSH = 'scoreHome.' + (inA - 1) + '.score';
+    }
+    
+    Matches.update({ 
+        _id:docID._id 
+      }, 
+      { $set: JSON.parse('{"'+strSH+'" : '+rn+'}') }
+    );
+
+    var i = 1;
+    var sumRuns = 0;
+    strTS = "";
+    if (upD == "Arriba") {
+      strTS = "totalScoreVisit";
+      while (i < inA){
+        sumRuns = sumRuns + docID.scoreVisit[i-1].score;
+        i = i + 1;
+      }
+    }
+    else {
+      strTS = "totalScoreHome";
+      while (i < inA){
+        sumRuns = sumRuns + docID.scoreHome[i-1].score;
+        i = i + 1;
+      }
+    }
+    sumRuns = parseInt(sumRuns) + parseInt(rn);
+    Matches.update({ 
+        _id:docID._id 
+      }, 
+      { $set: JSON.parse('{"'+strTS+'" : '+sumRuns+'}') }
+    );
   }, 
 
   'modNextIn': function (idAM, upD, inA){
+    var docID = Matches.findOne({"ended" : false});
+    var strSH = "";
+
     if (upD == "Arriba"){
+        strSH = 'scoreHome.' + (inA - 1) + '.score';
+
+        Matches.update({ 
+            _id:docID._id 
+          }, 
+          { $set: JSON.parse('{"'+strSH+'" : '+0+'}') }
+        );
+
         ActualMatch.update(
           { _id: idAM }, 
           { $set: {
@@ -45,6 +106,14 @@ Meteor.methods({
         );
       }
       else{
+        strSH = 'scoreVisit.' + (inA) + '.score';
+
+        Matches.update({ 
+            _id:docID._id 
+          }, 
+          { $set: JSON.parse('{"'+strSH+'" : '+0+'}') }
+        );
+
         var nextIn = inA + 1;
 
         ActualMatch.update(
@@ -91,6 +160,13 @@ Meteor.methods({
   },
 
   'modEndMatch': function (){
+    ActualMatch.update({
+      _id:ActualMatch.findOne({"idMV" : 0})['_id']}, 
+      {$set: { 
+        "ended" : true
+      }
+    });
+
     Matches.update({
       _id:Matches.findOne({"ended" : false})['_id']}, 
       {$set: { 
@@ -159,60 +235,36 @@ if (Meteor.isClient) {
   });
 
   Template.matchSettings.events({
-    'change .score-settings': function (e) {
+    'submit .score-settings': function (e) {
       e.preventDefault();
 
       var txtRuns = $(e.currentTarget).find("input[name=runs]")[0];
       var txtOuts = $(e.currentTarget).find("input[name=outs]")[0];
-      
-      var docID = Matches.findOne({"ended" : false});
-      var strSH = "";
 
-      if (docID !== undefined) {
-        if (this.upDown == "Arriba") {
-          strSH = 'scoreVisit.' + (this.inActual - 1) + '.score';
-        }
-        else {
-          strSH = 'scoreHome.' + (this.inActual - 1) + '.score';
-        }
-        
-        Matches.update({ 
-            _id:docID._id 
-          }, 
-          { $set: JSON.parse('{"'+strSH+'" : '+txtRuns.value+'}') }
-        );
-
-        var i = 1;
-        var sumRuns = 0;
-        strTS = "";
-        if (this.upDown == "Arriba") {
-          strTS = "totalScoreVisit";
-          while (i < this.inActual){
-            sumRuns = sumRuns + docID.scoreVisit[i-1].score;
-            i = i + 1;
-          }
-        }
-        else {
-          strTS = "totalScoreHome";
-          while (i < this.inActual){
-            sumRuns = sumRuns + docID.scoreHome[i-1].score;
-            i = i + 1;
-          }
-        }
-        sumRuns = parseInt(sumRuns) + parseInt(txtRuns.value);
-        Matches.update({ 
-            _id:docID._id 
-          }, 
-          { $set: JSON.parse('{"'+strTS+'" : '+sumRuns+'}') }
-        );
-
-        Meteor.call('modOuts', this._id, txtOuts.value);
-      }
-      
+      Meteor.call('modRuns', this._id, this.upDown, txtRuns.value, this.inActual);
+      Meteor.call('modOuts', this._id, txtOuts.value);
     }, 
 
     'click .new-half': function (e) {
       e.preventDefault();
+
+      var txtRuns = $(e.delegateTarget).find("input[name=runs]")[0];
+      var txtOuts = $(e.delegateTarget).find("input[name=outs]")[0];
+
+      Meteor.call('modRuns', this._id, this.upDown, txtRuns.value, this.inActual);
+      Meteor.call('modOuts', this._id, txtOuts.value);
+
+      txtRuns.value = 0;
+      txtOuts.value = 0;
+
+      var strNextUpD = "";
+
+      if (this.upDown == "Arriba") {
+        strNextUpD = "Abajo";
+      }
+      else {
+        strNextUpD = "Arriba";
+      }
 
       Meteor.call('modNextIn', this._id, this.upDown, this.inActual);
     },
@@ -240,27 +292,27 @@ if (Meteor.isClient) {
       if (otherTeam.value == "" || typeof optHomeVisit === "undefined") {
         if (otherTeam.value == "") {
           errorOtherTeam.className = "form-group has-error";
-          errorHelp1.className = "help-block";
+          errorHelp1.className = "alert alert-danger";
         }
         else {
           errorOtherTeam.className = "form-group";
-          errorHelp1.className = "help-block hidden";
+          errorHelp1.className = "alert alert-danger hidden";
         }
 
         if (typeof optHomeVisit === "undefined") {
           errorHomeVisit.className = "form-group has-error";
-          errorHelp2.className = "help-block";
+          errorHelp2.className = "alert alert-danger";
         }
         else {
           errorHomeVisit.className = "form-group";
-          errorHelp2.className = "help-block hidden";
+          errorHelp2.className = "alert alert-danger hidden";
         }
       }
       else {
         errorOtherTeam.className = "form-group";
-        errorHelp1.className = "help-block hidden";
+        errorHelp1.className = "alert alert-danger hidden";
         errorHomeVisit.className = "form-group";
-        errorHelp2.className = "help-block hidden";
+        errorHelp2.className = "alert alert-danger hidden";
 
         if (optHomeVisit.value == "home") {
           txtTeamHome = otherTeam.value;
@@ -279,7 +331,7 @@ if (Meteor.isClient) {
           Meteor.call('addActualMatch');
         }
         else {
-          Meteor.call('modActualMatch', [flagAM['_id'], 1, "Arriba", 0]);
+          Meteor.call('modActualMatch', flagAM['_id'], 1, "Arriba", 0, false);
         }
         
       }

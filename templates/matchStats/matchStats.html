@@ -1,10 +1,12 @@
 <template name="matchStats">
-	<div class="progress">
-	  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{per inActual}}%;">
-	    Inn: {{inActual}} {{upDown}}
-	  </div>
-	</div>
-	<div class="outs row">
-		<p class="col-xs-3 col-xs-offset-4">Outs:</p><p class="col-xs-2">{{outs}}</p>
-	</div>
+	{{#unless ended}}
+		<div class="progress">
+			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{per inActual}}%;">
+		    	Inn: {{inActual}} {{upDown}}
+		  	</div>
+		</div>
+		<div class="outs row">
+			<p class="col-xs-3 col-xs-offset-4">Outs:</p><p class="col-xs-2">{{outs}}</p>
+		</div>
+	{{/unless}}
 </template>

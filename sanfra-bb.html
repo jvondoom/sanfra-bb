@@ -25,7 +25,9 @@
 				{{/each}}
 			</div>
 			<div class="mForm2">
-				{{>newMatch}}
+				{{#each actualMatch}}
+					{{>newMatch}}
+				{{/each}}
 			</div>
 		</div>	
 	{{/if}}	
