@@ -18,6 +18,10 @@ body {
 	margin-bottom: 5%;
 }
 
+.logo-img {
+	height: 375px;
+}
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
 	background: #f7f7f9;
 	color: #fd5a1e;
