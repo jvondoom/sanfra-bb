@@ -8,29 +8,20 @@ Meteor.methods({
       inActual: 1,
       upDown: "Arriba",
       outs: 0, 
-      ended: false
-    });
-  }, 
-
-  'modActualMatch': function (idAM, inA, upD, ots){
-    ActualMatch.update(
-      { _id: idAM }, 
-      {$set: {
-        inActual: inA,
-        upDown: upD,
-        outs: ots
-      }
+      ended: false,
+      scoreActual: 0
     });
   },
 
-  'modActualMatch': function (idAM, inA, upD, ots, ends){
+  'modActualMatch': function (idAM, inA, upD, ots, sA, ends){
     ActualMatch.update(
       { _id: idAM }, 
       {$set: {
         inActual: inA,
         upDown: upD,
         outs: ots, 
-        ended: ends
+        ended: ends, 
+        scoreActual: sA
       }
     });
   },
@@ -83,6 +74,13 @@ Meteor.methods({
       }, 
       { $set: JSON.parse('{"'+strTS+'" : '+sumRuns+'}') }
     );
+
+    ActualMatch.update(
+      { _id: idAM }, 
+      {$set: { 
+        scoreActual: rn
+      }
+    });
   }, 
 
   'modNextIn': function (idAM, upD, inA){
@@ -102,7 +100,8 @@ Meteor.methods({
           { _id: idAM }, 
           { $set: {
             "upDown" : "Abajo",
-            "outs" : 0 } }
+            "outs" : 0, 
+            "scoreActual": 0 } }
         );
       }
       else{
@@ -146,7 +145,7 @@ Meteor.methods({
           { num: 9, score: null}
       ], 
       scoreVisit: [
-          { num: 1, score: null},
+          { num: 1, score: 0},
           { num: 2, score: null},
           { num: 3, score: null},
           { num: 4, score: null},
@@ -411,7 +410,7 @@ if (Meteor.isClient) {
           Meteor.call('addActualMatch');
         }
         else {
-          Meteor.call('modActualMatch', flagAM['_id'], 1, "Arriba", 0, false);
+          Meteor.call('modActualMatch', flagAM['_id'], 1, "Arriba", 0, 0, false);
         }
         
       }
