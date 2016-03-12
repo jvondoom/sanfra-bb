@@ -577,14 +577,6 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   });
 
-  Template.registerHelper('formatStr', function(str) {
-    if ($(str).length == 0) {
-      return("");
-    }else{
-      return(str);
-    }
-  });
-
   Template.registerHelper('posToName', function(pos) {
     var strPos = "";
 
