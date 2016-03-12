@@ -3,32 +3,81 @@
 		<h2><small>Nuevo Partido</small></h2>
 	</div>
 
-	<form class="new-match form-inline text-center">
-		<div id="helpBlock1" class="alert alert-danger hidden" role="alert">
-			<span class="help-block">El nombre del equipo no puede quedar en blanco.</span>
-		</div>
-		<div id="helpBlock2" class="alert alert-danger hidden" role="alert">
-			<span class="help-block">Seleccione una opción.</span>
-		</div>
-		<div class="form-group" id="other-team">
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">Equipo Contrario</span>
-				<input type="text" class="form-control in-actual"  name="otherTeam" aria-describedby="basic-addon1">
-				
+	<form class="new-match form-inline">
+		<div class="text-center">
+			<div id="helpBlock1" class="alert alert-danger hidden" role="alert">
+				<span class="help-block">El nombre del equipo no puede quedar en blanco.</span>
+			</div>
+			<div id="helpBlock2" class="alert alert-danger hidden" role="alert">
+				<span class="help-block">Seleccione si el equipo contrario es Casa o Visita.</span>
+			</div>
+			<div id="helpBlock3" class="alert alert-danger hidden" role="alert">
+				<span class="help-block">La lista de jugadores esta vacia.</span>
+			</div>
+			<div class="form-group" id="other-team">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Equipo Contrario</span>
+					<input type="text" class="form-control in-actual"  name="otherTeam" aria-describedby="basic-addon1">
+					
+				</div>
+			</div>
+			<div class="form-group" id="home-visit">
+				<div class="input-group">
+					<label class="radio-inline"><input type="radio" name="homeVisit" value="home" >Casa</label>
+					<label class="radio-inline"><input type="radio" name="homeVisit" value="visit">Visita</label>
+				</div>
+			</div>
+			<div class="form-group">
+				{{#if ended}}
+					<button type="submit" class="btn btn-default">Comenzar</button>
+				{{else}}
+					<button type="submit" class="btn btn-default" disabled="disabled">Comenzar</button>
+				{{/if}}
 			</div>
 		</div>
-		<div class="form-group" id="home-visit">
-			<div class="input-group">
-				<label class="radio-inline"><input type="radio" name="homeVisit" value="home" >Casa</label>
-				<label class="radio-inline"><input type="radio" name="homeVisit" value="visit">Visita</label>
+		<div class="container-fluid">
+			<div class="page-header">
+				<h3><small>Lista de jugadores de San Francisco</small></h3>
 			</div>
-		</div>
-		<div class="form-group">
-			{{#if ended}}
-				<button type="submit" class="btn btn-default">Comenzar</button>
-			{{else}}
-				<button type="submit" class="btn btn-default" disabled="disabled">Comenzar</button>
-			{{/if}}
+			<div class="alert alert-info" role="alert">
+				<strong>Código de las posiciones:</strong>
+				<ul class="group-list">
+				  <li>1 - Lanzador</li>
+				  <li>2 - Receptor</li>
+				  <li>3 - Primera Base</li>
+				  <li>4 - Segunda Base</li>
+				  <li>5 - Tercera Base</li>
+				  <li>6 - Parador en corto</li>
+				  <li>7 - Jardinero Izquierdo</li>
+				  <li>8 - Jardinero Central Izquiero</li>
+				  <li>9 - Jardinero Central Derecho</li>
+				  <li>10 - Jardinero Derecho</li>
+				</ul>
+			</div>
+			<div id="helpPl" class="alert alert-danger hidden" role="alert">
+				<span class="help-block">Debe de escoger un jugador.</span>
+			</div>
+			<div class="row player-row">
+				<div class="input-group col-md-2" id="fPB">
+					<div class="input-group-addon">P/B.</div>
+					<input name="pb" type="number" class="form-control">
+				</div>
+				<div class="input-group">
+					<select class="selectpicker" id="player-info">
+						<option selected disabled>Escoja el jugador</option>
+						{{#each players}}
+							<option value="{{num}}">{{name}}</option>
+						{{/each}}
+					</select>
+				</div>				
+				<div class="input-group col-md-2" id="fPOS">
+					<div class="input-group-addon">Pos.</div>
+					<input name="pos" type="number" class="form-control">
+				</div>
+				<div class="input-group col-md-2">
+					<input class="btn btn-default add-box" type="button" value="Agregar">
+				</div>
+			</div>
 		</div>
 	</form>
 </template>
