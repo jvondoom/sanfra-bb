@@ -35,49 +35,51 @@
 				{{/if}}
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="page-header">
-				<h3><small>Lista de jugadores de San Francisco</small></h3>
-			</div>
-			<div class="alert alert-info" role="alert">
-				<strong>Código de las posiciones:</strong>
-				<ul class="group-list">
-				  <li>1 - Lanzador</li>
-				  <li>2 - Receptor</li>
-				  <li>3 - Primera Base</li>
-				  <li>4 - Segunda Base</li>
-				  <li>5 - Tercera Base</li>
-				  <li>6 - Parador en corto</li>
-				  <li>7 - Jardinero Izquierdo</li>
-				  <li>8 - Jardinero Central Izquiero</li>
-				  <li>9 - Jardinero Central Derecho</li>
-				  <li>10 - Jardinero Derecho</li>
-				</ul>
-			</div>
-			<div id="helpPl" class="alert alert-danger hidden" role="alert">
-				<span class="help-block">Debe de escoger un jugador.</span>
-			</div>
-			<div class="row player-row">
-				<div class="input-group col-md-2" id="fPB">
-					<div class="input-group-addon">P/B.</div>
-					<input name="pb" type="number" class="form-control">
+		{{#if ended}}
+			<div class="container-fluid">
+				<div class="page-header">
+					<h3><small>Lista de jugadores de San Francisco</small></h3>
 				</div>
-				<div class="input-group">
-					<select class="selectpicker" id="player-info">
-						<option selected disabled>Escoja el jugador</option>
-						{{#each players}}
-							<option value="{{num}}">{{name}}</option>
-						{{/each}}
-					</select>
-				</div>				
-				<div class="input-group col-md-2" id="fPOS">
-					<div class="input-group-addon">Pos.</div>
-					<input name="pos" type="number" class="form-control">
+				<div class="alert alert-info" role="alert">
+					<strong>Código de las posiciones:</strong>
+					<ul class="group-list">
+					  <li>1 - Lanzador</li>
+					  <li>2 - Receptor</li>
+					  <li>3 - Primera Base</li>
+					  <li>4 - Segunda Base</li>
+					  <li>5 - Tercera Base</li>
+					  <li>6 - Parador en corto</li>
+					  <li>7 - Jardinero Izquierdo</li>
+					  <li>8 - Jardinero Central Izquiero</li>
+					  <li>9 - Jardinero Central Derecho</li>
+					  <li>10 - Jardinero Derecho</li>
+					</ul>
 				</div>
-				<div class="input-group col-md-2">
-					<input class="btn btn-default add-box" type="button" value="Agregar">
+				<div id="helpPl" class="alert alert-danger hidden" role="alert">
+					<span class="help-block">Debe de escoger un jugador.</span>
+				</div>
+				<div class="row player-row">
+					<div class="input-group col-md-2" id="fPB">
+						<div class="input-group-addon">P/B.</div>
+						<input name="pb" type="number" class="form-control">
+					</div>
+					<div class="input-group">
+						<select class="selectpicker" id="player-info">
+							<option selected disabled>Escoja el jugador</option>
+							{{#each players}}
+								<option value="{{num}}">{{name}}</option>
+							{{/each}}
+						</select>
+					</div>				
+					<div class="input-group col-md-2" id="fPOS">
+						<div class="input-group-addon">Pos.</div>
+						<input name="pos" type="number" class="form-control">
+					</div>
+					<div class="input-group col-md-2">
+						<input class="btn btn-default add-box" type="button" value="Agregar">
+					</div>
 				</div>
 			</div>
-		</div>
+		{{/if}}
 	</form>
 </template>
