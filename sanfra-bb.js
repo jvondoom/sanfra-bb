@@ -372,7 +372,28 @@ if (Meteor.isClient) {
         var strPL = '[';
 
         for (var i = 0; i < txtPB.length; i++) {
-          strPL = strPL  + '{"PB": '+txtPB[i].value+', "name": "'+txtPN[i].value+'", "pos": '+txtPos[i].value+', "num": '+txtNum[i].value+'}';
+          strPL = strPL + '{';
+
+          if (txtPB[i].value != "") {
+            strPL = strPL + '"PB": '+txtPB[i].value+', ';
+          }else {
+            strPL = strPL + '"PB": "", ';
+          }
+
+          strPL = strPL + '"name": "'+txtPN[i].value+'", ';          
+
+          if (txtPos[i].value != "") {
+            strPL = strPL + '"pos": '+txtPos[i].value+', ';
+          }else {
+            strPL = strPL + '"pos": "", ';
+          }
+
+          if (txtPos[i].value != "") {
+            strPL = strPL  + '"num": '+txtNum[i].value+'}';
+          }else{
+            strPL = strPL  + '"num": ""}';
+          }
+          
 
           if ((i + 1) < txtPB.length) {
             strPL = strPL + ',';
@@ -380,6 +401,7 @@ if (Meteor.isClient) {
         }
 
         strPL = strPL + ']';
+
 
         Meteor.call('addMatch', txtTeamHome, txtTeamVisit, JSON.parse(strPL));
 
@@ -391,6 +413,7 @@ if (Meteor.isClient) {
         else {
           Meteor.call('modActualMatch', flagAM['_id'], 1, "Arriba", 0, false);
         }
+        
       }
     }, 
 
@@ -552,6 +575,14 @@ if (Meteor.isClient) {
   
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
+  });
+
+  Template.registerHelper('formatStr', function(str) {
+    if ($(str).length == 0) {
+      return("");
+    }else{
+      return(str);
+    }
   });
 
   Template.registerHelper('posToName', function(pos) {

@@ -52,17 +52,21 @@
 				      <div class="modal-body">
 				      	<table class="table">
 				      		<thead>
-				      			<th>Número de Jugador</th>
-				      			<th>Nombre de Jugador</th>
-				      			<th>P/B</th>
-				      			<th>Posición</th>
+				      			<tr>
+				      				<th>Número de Jugador</th>
+					      			<th>Nombre de Jugador</th>
+					      			<th>P/B</th>
+					      			<th>Posición</th>
+				      			</tr>				      			
 				      		</thead>
 				      		<tbody>
 				      			{{#each players}}
-				      				<td>{{num}}</td>
-				      				<td>{{name}}</td>
-				      				<td>{{PB}}</td>
-				      				<td>{{posToName pos}}</td>
+				      				<tr>
+				      					<td>{{formatStr num}}</td>
+					      				<td>{{name}}</td>
+					      				<td>{{PB}}</td>
+					      				<td>{{posToName pos}}</td>
+				      				</tr>				      				
 				      			{{/each}}
 				      		</tbody>
 				      	</table>
