@@ -572,6 +572,11 @@ if (Meteor.isClient) {
   Template.registerHelper('formatDate', function(date) {
     return date.toLocaleDateString();
   });
+
+  Template.registerHelper('idDate', function(date) {
+    var strDate = date.toLocaleDateString();
+    return (strDate.replace(/\//g, ''));
+  });  
   
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
