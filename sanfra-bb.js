@@ -489,7 +489,7 @@ if (Meteor.isClient) {
       },
       {
         num: 24, 
-        name: "Adwin Alfredo Salas Bermudez"
+        name: "Edwin Alfredo Salas Bermudez"
       },
       {
         num: 77, 
@@ -497,7 +497,7 @@ if (Meteor.isClient) {
       },
       {
         num: 8, 
-        name: "Feliz Alfonso Noguera Telles"
+        name: "Felix Alfonso Noguera Telles"
       },
       {
         num: 6, 
