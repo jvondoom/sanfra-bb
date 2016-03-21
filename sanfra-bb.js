@@ -387,7 +387,7 @@ if (Meteor.isClient) {
             strPL = strPL + '"pos": "", ';
           }
 
-          if (txtPos[i].value != "") {
+          if (txtNum[i].value != "") {
             strPL = strPL  + '"num": '+txtNum[i].value+'}';
           }else{
             strPL = strPL  + '"num": ""}';
@@ -442,7 +442,7 @@ if (Meteor.isClient) {
         box_html.hide();
         $('.new-match .row:last').after(box_html);
         box_html.fadeIn('slow');
-        
+
         txtPB.value = "";
       }
       
