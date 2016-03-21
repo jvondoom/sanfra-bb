@@ -464,105 +464,105 @@ if (Meteor.isClient) {
   Template.newMatch.helpers({
     players: [
       {
-        num: "", 
-        name: "Alvaro Enrique Saborio Mora"
-      },
-      {
-        num: 19, 
-        name: "Arturo Barboza"
-      },
-      {
-        num: 73, 
-        name: "Carlos Gonzalez Velazquez"
-      },
-      {
-        num: "", 
-        name: "Carlos Leo Montero Fernandez"
-      },
-      {
-        num: 13, 
-        name: "Christian Enrique Salas Bermudez"
-      },
-      {
-        num: "", 
-        name: "Edmundo Garcia"
-      },
-      {
-        num: 24, 
-        name: "Edwin Alfredo Salas Bermudez"
-      },
-      {
-        num: 77, 
-        name: "Eric Alberto Romero Armas"
-      },
-      {
-        num: 8, 
-        name: "Felix Alfonso Noguera Telles"
+        num: 1, 
+        name: "Ramon Silva Pichardo"
       },
       {
         num: 6, 
         name: "Fernando Francisco Valverde M"
       },
       {
-        num: 32,
-        name: "Ignacio Toruño"
-      },
-      {
-        num: 44, 
-        name: "Jean Carlo Saborio Mora"
-      },
-      {
-        num: 34, 
-        name: "Jimmy Rodriguez Ramirez"
-      },
-      {
-        num: 54, 
-        name: "Jorge Enrique Garro Zuñiga"
+        num: 8, 
+        name: "Felix Alfonso Noguera Telles"
       },
       {
         num: 10, 
         name: "Juan Carlos Ulloa"
       },
       {
-        num: 74, 
-        name: "Marco Antonio Valenciano Ruiz"
-      },
-      {
         num: 11, 
         name: "Marco Chacon Solis"
       },
       {
-        num: 60, 
-        name: "Marco Vinicio Chaves Leiva"
+        num: 13, 
+        name: "Christian Enrique Salas Bermudez"
       },
       {
-        num: 1, 
-        name: "Ramon Silva Pichardo"
+        num: 14, 
+        name: "William Cornelio Murillo Saborio"
       },
       {
         num: 16, 
         name: "Ricardo Adolfo Ramirez Schmidt"
       },
       {
+        num: 19, 
+        name: "Arturo Barboza"
+      },
+      {
         num: 20, 
         name: "Roberto Javier Soto Massey"
-      },
-      {
-        num: "", 
-        name: "Roberto Moreno"
-      },
-      {
-        num: 29, 
-        name: "Roger Enrique Salazar Vega"
       },
       {
         num: 23, 
         name: "Victor Eduardo Calvo Aymerich"
       },
       {
-        num: 14, 
-        name: "William Cornelio Murillo Saborio"
+        num: 24, 
+        name: "Edwin Alfredo Salas Bermudez"
       },
+      {
+        num: 29, 
+        name: "Roger Enrique Salazar Vega"
+      },
+      {
+        num: 32,
+        name: "Ignacio Toruño"
+      },
+      {
+        num: 34, 
+        name: "Jimmy Rodriguez Ramirez"
+      },
+      {
+        num: 44, 
+        name: "Jean Carlo Saborio Mora"
+      },
+      {
+        num: 54, 
+        name: "Jorge Enrique Garro Zuñiga"
+      },
+      {
+        num: 60, 
+        name: "Marco Vinicio Chaves Leiva"
+      },
+      {
+        num: 73, 
+        name: "Carlos Gonzalez Velazquez"
+      },
+      {
+        num: 74, 
+        name: "Marco Antonio Valenciano Ruiz"
+      },
+      {
+        num: 77, 
+        name: "Eric Alberto Romero Armas"
+      },
+      {
+        num: "", 
+        name: "Alvaro Enrique Saborio Mora"
+      },
+      {
+        num: "", 
+        name: "Carlos Leo Montero Fernandez"
+      },
+      {
+        num: "", 
+        name: "Edmundo Garcia"
+      },
+      {
+        num: "", 
+        name: "Roberto Moreno"
+      }
     ]
   });
 
