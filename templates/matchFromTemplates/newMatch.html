@@ -53,16 +53,17 @@
 					  <li>8 - Jardinero Central Izquiero</li>
 					  <li>9 - Jardinero Central Derecho</li>
 					  <li>10 - Jardinero Derecho</li>
+					  <li>11 - Bateador Extra</li>
+					  <li>12 - Bateador Designado</li>
 					</ul>
 				</div>
 				<div id="helpPl" class="alert alert-danger hidden" role="alert">
 					<span class="help-block">Debe de escoger un jugador.</span>
 				</div>
-				<div class="row player-row">
-					<div class="input-group col-md-2" id="fPB">
-						<div class="input-group-addon">P/B.</div>
-						<input name="pb" type="number" class="form-control">
-					</div>
+				<div id="helpPos" class="alert alert-danger hidden" role="alert">
+					<span class="help-block">Seleccione una de las opciones para la posición.</span>
+				</div>
+				<div class="row player-row">					
 					<div class="input-group">
 						<select class="selectpicker" id="player-info">
 							<option selected disabled>Escoja el jugador</option>
@@ -70,11 +71,29 @@
 								<option value="{{num}}">{{name}}</option>
 							{{/each}}
 						</select>
-					</div>				
-					<div class="input-group col-md-2" id="fPOS">
-						<div class="input-group-addon">Pos.</div>
-						<input name="pos" type="number" class="form-control">
 					</div>
+					<div class="input-group">
+						<select class="selectpicker" id="pos-info">
+							<option selected disabled>Escoja la posición</option>
+							<option value="1">Lanzador</option>
+							<option value="2">Receptor</option>
+							<option value="3">Primera Base</option>
+							<option value="4">Segunda Base</option>
+							<option value="5">Tercera Base</option>
+							<option value="6">Parador en corto</option>
+							<option value="7">Jardinero Izquierdo</option>
+							<option value="8">Jardinero Central Izquiero</option>
+							<option value="9">Jardinero Central Derecho</option>
+							<option value="10">Jardinero Derecho</option>
+							<option value="11">Bateador Extra</option>
+							<option value="12">Bateador Designado</option>
+							<option value="">N/A</option>
+						</select>
+					</div>
+					<div class="input-group col-md-2" id="fPB">
+						<div class="input-group-addon">P/B.</div>
+						<input name="pb" type="number" min="1" max="12" class="form-control">
+					</div>			
 					<div class="input-group col-md-2">
 						<input class="btn btn-default add-box" type="button" value="Agregar">
 					</div>

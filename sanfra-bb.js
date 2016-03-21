@@ -421,8 +421,9 @@ if (Meteor.isClient) {
 
       var txtPB = $(e.delegateTarget).find("input[name=pb]")[0];
       var txtPlayerInfo = $(e.delegateTarget).find("#player-info")[0].selectedOptions[0];
-      var txtPos = $(e.delegateTarget).find("input[name=pos]")[0];
+      var txtPosInfo = $(e.delegateTarget).find("#pos-info")[0].selectedOptions[0];
       var errorHelp2 =  $(e.delegateTarget).find('#helpPl')[0];
+      var errorHelp3 =  $(e.delegateTarget).find('#helpPos')[0];
 
       if (txtPlayerInfo.value == "Escoja el jugador") {
         errorHelp2.className = "alert alert-danger";
@@ -430,11 +431,19 @@ if (Meteor.isClient) {
         errorHelp2.className = "alert alert-danger hidden";
       }
 
-      if (txtPlayerInfo.value != "Escoja el jugador") {
-        var box_html = $('<div class="row player-row"><div class="input-group col-md-2"><div class="input-group-addon">P/B</div><input name="PB" type="number" class="form-control" value="'+ txtPB.value +'" readonly></div> <div class="input-group col-md-5"><div class="input-group-addon">Nombre del Jugador</div><input name="PN" type="text" class="form-control" value="'+ txtPlayerInfo.text +'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">Pos.</div><input name="Pos" type="number" class="form-control" value="'+ txtPos.value+'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">#</div><input name="Num" type="number" class="form-control" value="'+ txtPlayerInfo.value +'"></div> <button type="button" class="btn btn-default remove-box"><span class="glyphicon glyphicon-remove"></span></button></div>');
+      if (txtPosInfo.value == "Escoja la posición") {
+        errorHelp3.className = "alert alert-danger";
+      } else {
+        errorHelp3.className = "alert alert-danger hidden";
+      }
+
+      if (txtPlayerInfo.value != "Escoja el jugador" && txtPosInfo.value != "Escoja la posición") {
+        var box_html = $('<div class="row player-row"><div class="input-group col-md-2"><div class="input-group-addon">P/B</div><input name="PB" type="number" class="form-control" value="'+ txtPB.value +'" readonly></div> <div class="input-group col-md-5"><div class="input-group-addon">Nombre</div><input name="PN" type="text" class="form-control" value="'+ txtPlayerInfo.text +'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">Pos.</div><input name="Pos" type="number" class="form-control" value="'+ txtPosInfo.value+'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">#</div><input name="Num" type="number" class="form-control" value="'+ txtPlayerInfo.value +'"></div> <button type="button" class="btn btn-default remove-box"><span class="glyphicon glyphicon-remove"></span></button></div>');
         box_html.hide();
         $('.new-match .row:last').after(box_html);
-        box_html.fadeIn('slow');  
+        box_html.fadeIn('slow');
+        
+        txtPB.value = "";
       }
       
       return false;
@@ -614,6 +623,12 @@ if (Meteor.isClient) {
         break;
       case 10: 
         strPos = "Jardinero Derecho";
+        break;
+      case 11: 
+        strPos = "Bateador Extra";
+        break;
+      case 12: 
+        strPos = "Bateador Designado";
         break;
       default: 
         strPos = "";
