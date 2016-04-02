@@ -522,7 +522,7 @@ if (Meteor.isClient) {
       {
         num: 27, 
         name: "Roberto Moreno Mata"
-      }
+      },
       {
         num: 29, 
         name: "Roger Enrique Salazar Vega"
@@ -566,7 +566,7 @@ if (Meteor.isClient) {
       {
         num: 77, 
         name: "Eric Alberto Romero Armas"
-      },
+      }
     ]
   });
 
