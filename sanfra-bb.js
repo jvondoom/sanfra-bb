@@ -469,7 +469,7 @@ if (Meteor.isClient) {
       },
       {
         num: 6, 
-        name: "Fernando Francisco Valverde M"
+        name: "Fernando Fco. Valverde Manzanares"
       },
       {
         num: 8, 
@@ -477,7 +477,7 @@ if (Meteor.isClient) {
       },
       {
         num: 10, 
-        name: "Juan Carlos Ulloa"
+        name: "Juan Carlos Ulloa Monge"
       },
       {
         num: 11, 
@@ -497,11 +497,15 @@ if (Meteor.isClient) {
       },
       {
         num: 19, 
-        name: "Arturo Barboza"
+        name: "Arturo Barboza Morales"
       },
       {
         num: 20, 
         name: "Roberto Javier Soto Massey"
+      },
+      {
+        num: 21, 
+        name: "Carlos Leo Montero Fernandez"
       },
       {
         num: 23, 
@@ -512,12 +516,24 @@ if (Meteor.isClient) {
         name: "Edwin Alfredo Salas Bermudez"
       },
       {
+        num: 26, 
+        name: "Rafael Zapata Monge"
+      },
+      {
+        num: 27, 
+        name: "Roberto Moreno Mata"
+      }
+      {
         num: 29, 
         name: "Roger Enrique Salazar Vega"
       },
       {
+        num: 31, 
+        name: "Alvaro Enrique Saborio Mora"
+      },
+      {
         num: 32,
-        name: "Ignacio Toruño"
+        name: "Ignacio Toruño del Castillo"
       },
       {
         num: 34, 
@@ -526,6 +542,10 @@ if (Meteor.isClient) {
       {
         num: 44, 
         name: "Jean Carlo Saborio Mora"
+      },
+      {
+        num: 47, 
+        name: "Edmundo Garcia Sanchez"
       },
       {
         num: 54, 
@@ -547,22 +567,6 @@ if (Meteor.isClient) {
         num: 77, 
         name: "Eric Alberto Romero Armas"
       },
-      {
-        num: "", 
-        name: "Alvaro Enrique Saborio Mora"
-      },
-      {
-        num: "", 
-        name: "Carlos Leo Montero Fernandez"
-      },
-      {
-        num: "", 
-        name: "Edmundo Garcia"
-      },
-      {
-        num: "", 
-        name: "Roberto Moreno"
-      }
     ]
   });
 
