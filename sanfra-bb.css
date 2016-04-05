@@ -113,18 +113,15 @@ a:hover, a:focus {
 	background: #dfdfdf;
 	height: 80%;
 	border-radius: 0 0 10px 10px;
+	overflow: auto;
 }
 
 .match-info-on {
 	background: #dfdfdf;
 	height: 80%;
 	border-radius: 0 0 10px 10px;
-}
-
-.tablon {
 	overflow: auto;
 }
-
 .table > thead > tr > th {
 	border-bottom: 2px solid #fd5a1e;
 }
