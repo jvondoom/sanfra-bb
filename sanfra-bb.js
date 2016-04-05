@@ -243,6 +243,12 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.match.helpers({
+    foo: function () {
+      console.log('test');
+    }
+  });
+
   Template.matchSettings.events({
     'submit .score-settings': function (e) {
       e.preventDefault();
@@ -635,10 +641,6 @@ if (Meteor.isClient) {
     return strPos;
   });
 
-  Template.registerHelper('cosaConPlay', function (ply) {
-    console.log('aqui si esta haciendo la cosa');
-  })
-
   Template.registerHelper('sortPlayers', function (players) {
     players.sort(function (a, b) {
       if (a.PB > b.PB) {
@@ -651,7 +653,5 @@ if (Meteor.isClient) {
       return 0;
     });
 
-    console.log($(players));
-    
   })
 }
