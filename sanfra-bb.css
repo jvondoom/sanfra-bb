@@ -95,7 +95,7 @@ a:hover, a:focus {
 }
 
 .match {
-	margin-bottom: 3%;
+	margin-bottom: 5%;
 }
 
 .match-header {
@@ -113,13 +113,15 @@ a:hover, a:focus {
 	background: #dfdfdf;
 	height: 80%;
 	border-radius: 0 0 10px 10px;
-	overflow: auto;
 }
 
 .match-info-on {
 	background: #dfdfdf;
 	height: 80%;
 	border-radius: 0 0 10px 10px;
+}
+
+.tablon {
 	overflow: auto;
 }
 
