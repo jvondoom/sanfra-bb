@@ -646,5 +646,8 @@ if (Meteor.isClient) {
       // a must be equal to b
       return 0;
     });
+
+    console.log($(players));
+
   })
 }
