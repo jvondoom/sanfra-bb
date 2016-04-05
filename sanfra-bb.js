@@ -382,17 +382,10 @@ if (Meteor.isClient) {
           strPL = strPL + '"name": "'+txtPN[i].value+'", ';          
 
           if (txtPos[i].value != "") {
-            strPL = strPL + '"pos": '+txtPos[i].value+', ';
+            strPL = strPL + '"pos": "'+txtPos[i].value+'"}';
           }else {
-            strPL = strPL + '"pos": "", ';
+            strPL = strPL + '"pos": ""}';
           }
-
-          if (txtNum[i].value != "") {
-            strPL = strPL  + '"num": '+txtNum[i].value+'}';
-          }else{
-            strPL = strPL  + '"num": ""}';
-          }
-          
 
           if ((i + 1) < txtPB.length) {
             strPL = strPL + ',';
@@ -438,7 +431,7 @@ if (Meteor.isClient) {
       }
 
       if (txtPlayerInfo.value != "Escoja el jugador" && txtPosInfo.value != "Escoja la posición") {
-        var box_html = $('<div class="row player-row"><div class="input-group col-md-2"><div class="input-group-addon">P/B</div><input name="PB" type="number" class="form-control" value="'+ txtPB.value +'" readonly></div> <div class="input-group col-md-5"><div class="input-group-addon">Nombre</div><input name="PN" type="text" class="form-control" value="'+ txtPlayerInfo.text +'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">Pos.</div><input name="Pos" type="number" class="form-control" value="'+ txtPosInfo.value+'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">#</div><input name="Num" type="number" class="form-control" value="'+ txtPlayerInfo.value +'"></div> <button type="button" class="btn btn-default remove-box"><span class="glyphicon glyphicon-remove"></span></button></div>');
+        var box_html = $('<div class="row player-row"><div class="input-group col-md-2"><div class="input-group-addon">P/B</div><input name="PB" type="number" class="form-control" value="'+ txtPB.value +'" readonly></div> <div class="input-group col-md-5"><div class="input-group-addon">Nombre</div><input name="PN" type="text" class="form-control" value="'+ txtPlayerInfo.text +'" readonly></div> <div class="input-group col-md-2"><div class="input-group-addon">Pos.</div><input name="Pos" type="text" class="form-control" value="'+ txtPosInfo.value+'" readonly></div> <button type="button" class="btn btn-default remove-box"><span class="glyphicon glyphicon-remove"></span></button></div>');
         box_html.hide();
         $('.new-match .row:last').after(box_html);
         box_html.fadeIn('slow');
@@ -628,10 +621,10 @@ if (Meteor.isClient) {
       case 10: 
         strPos = "Jardinero Derecho";
         break;
-      case 11: 
+      case 'BE': 
         strPos = "Bateador Extra";
         break;
-      case 12: 
+      case 'BD': 
         strPos = "Bateador Designado";
         break;
       default: 

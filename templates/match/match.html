@@ -53,18 +53,16 @@
 				      	<table class="table">
 				      		<thead>
 				      			<tr>
-				      				<th>Número de Jugador</th>
-					      			<th>Nombre de Jugador</th>
-					      			<th>P/B</th>
+				      				<th>P/B</th>
+					      			<th>(#) Nombre del Jugador</th>
 					      			<th>Posición</th>
 				      			</tr>				      			
 				      		</thead>
 				      		<tbody>
 				      			{{#each players}}
 				      				<tr>
-				      					<td>{{num}}</td>
+				      					<td>{{PB}}</td>
 					      				<td>{{name}}</td>
-					      				<td>{{PB}}</td>
 					      				<td>{{posToName pos}}</td>
 				      				</tr>				      				
 				      			{{/each}}
