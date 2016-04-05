@@ -634,4 +634,17 @@ if (Meteor.isClient) {
 
     return strPos;
   });
+
+  Template.registerHelper('sortPlayers', function (players) {
+    players.sort(function (a, b) {
+      if (a.PB > b.PB) {
+        return 1;
+      }
+      if (a.PB < b.PB) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+  })
 }
