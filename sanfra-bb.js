@@ -635,6 +635,10 @@ if (Meteor.isClient) {
     return strPos;
   });
 
+  Template.registerHelper('cosaConPlay', function (ply) {
+    console.log('aqui si esta haciendo la cosa');
+  })
+
   Template.registerHelper('sortPlayers', function (players) {
     players.sort(function (a, b) {
       if (a.PB > b.PB) {
@@ -648,6 +652,6 @@ if (Meteor.isClient) {
     });
 
     console.log($(players));
-
+    
   })
 }
