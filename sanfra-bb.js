@@ -591,40 +591,40 @@ if (Meteor.isClient) {
     var strPos = "";
 
     switch (pos) {
-      case 1: 
+      case "1": 
         strPos = "Lanzador";
         break;
-      case 2: 
+      case "2": 
         strPos = "Receptor";
         break;
-      case 3: 
+      case "3": 
         strPos = "Primera Base";
         break;
-      case 4: 
+      case "4": 
         strPos = "Segunda Base";
         break;
-      case 5: 
+      case "5": 
         strPos = "Tercera Base";
         break;
-      case 6: 
+      case "6": 
         strPos = "Parador en corto";
         break;
-      case 7: 
+      case "7": 
         strPos = "Jardinero Izquierdo";
         break;
-      case 8: 
+      case "8": 
         strPos = "Jardinero Central Izquierdo";
         break;
-      case 9: 
+      case "9": 
         strPos = "Jardinero Central Derecho";
         break;
-      case 10: 
+      case "10": 
         strPos = "Jardinero Derecho";
         break;
-      case 'BE': 
+      case "BE": 
         strPos = "Bateador Extra";
         break;
-      case 'BD': 
+      case "BD": 
         strPos = "Bateador Designado";
         break;
       default: 

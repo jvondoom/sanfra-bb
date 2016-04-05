@@ -46,7 +46,11 @@
 				<div id="helpPos" class="alert alert-danger hidden" role="alert">
 					<span class="help-block">Seleccione una de las opciones para la posición.</span>
 				</div>
-				<div class="row player-row">					
+				<div class="row player-row">
+					<div class="input-group col-md-2" id="fPB">
+						<div class="input-group-addon">P/B.</div>
+						<input name="pb" type="number" min="1" max="12" class="form-control">
+					</div>	
 					<div class="input-group">
 						<select class="selectpicker" id="player-info">
 							<option selected disabled>Escoja el jugador</option>
@@ -73,10 +77,6 @@
 							<option value="">N/A</option>
 						</select>
 					</div>
-					<div class="input-group col-md-2" id="fPB">
-						<div class="input-group-addon">P/B.</div>
-						<input name="pb" type="number" min="1" max="12" class="form-control">
-					</div>			
 					<div class="input-group col-md-2">
 						<input class="btn btn-default add-box" type="button" value="Agregar">
 					</div>
