@@ -244,8 +244,17 @@ if (Meteor.isClient) {
   });
 
   Template.match.helpers({
-    foo: function () {
-      console.log('test');
+    foo: function (players) {
+      players.sort(function (a, b) {
+      if (a.PB > b.PB) {
+        return 1;
+      }
+      if (a.PB < b.PB) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
     }
   });
 
@@ -317,8 +326,7 @@ if (Meteor.isClient) {
     }
     else {
       $('select').selectpicker();  
-    }
-    
+    }    
 
   });
 
@@ -640,18 +648,4 @@ if (Meteor.isClient) {
 
     return strPos;
   });
-
-  Template.registerHelper('sortPlayers', function (players) {
-    players.sort(function (a, b) {
-      if (a.PB > b.PB) {
-        return 1;
-      }
-      if (a.PB < b.PB) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
-    });
-
-  })
 }
