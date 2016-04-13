@@ -1,7 +1,15 @@
+/* Instance of the collections in MongoDB
+  - 'matches' is the collection where the matches info is saved
+  - 'matchValues' is the temporal value collection for the actual match
+*/
 Matches = new Mongo.Collection("matches");
 ActualMatch = new Mongo.Collection("matchValues");
 
+
+// Methods that interact with the collections in the MongoDB
 Meteor.methods({
+
+  // Adds the unique document of 'matchValues' in case isn't created
   'addActualMatch': function (){
     ActualMatch.insert({
       idMV: 0,
@@ -13,6 +21,7 @@ Meteor.methods({
     });
   },
 
+  // Updates the values of 'matchValues' with the current info of each inning
   'modActualMatch': function (idAM, inA, upD, ots, sA, ends){
     ActualMatch.update(
       { _id: idAM }, 
@@ -26,6 +35,9 @@ Meteor.methods({
     });
   },
 
+  /* Updates the 'outs' value from 'matchValues'
+    - Used by the submit & new-half of matchSettings Template
+  */
   'modOuts': function (idAM, ots){
     ActualMatch.update(
       { _id: idAM }, 
@@ -35,6 +47,9 @@ Meteor.methods({
     });
   }, 
 
+  /* Updates the runs from the actual inning and updates the Score
+    - Used by the submit & new-half of matchSettings Template
+  */
   'modRuns': function (idAM, upD, rn, inA){
     var docID = Matches.findOne({"ended" : false});
 
@@ -83,6 +98,10 @@ Meteor.methods({
     });
   }, 
 
+  /*Updates the values in matchValues and puts a 0 in the new inning
+    - Used by new-half of matchSettings Template
+    - ***PENDING*** Extra Inning information (10+)
+  */
   'modNextIn': function (idAM, upD, inA){
     var docID = Matches.findOne({"ended" : false});
     var strSH = "";
@@ -125,6 +144,7 @@ Meteor.methods({
       }
   }, 
 
+  //Creates a new match with the information from newMatch Template
   'addMatch': function (tmH, tmV, pls) {
     Matches.insert({
       date: new Date(), 
@@ -159,6 +179,7 @@ Meteor.methods({
     });
   },
 
+  //Updates the values from matchSettings and matches to end the game
   'modEndMatch': function (){
     ActualMatch.update({
       _id:ActualMatch.findOne({"idMV" : 0})['_id']}, 
@@ -188,6 +209,7 @@ if (Meteor.isServer) {
 if (Meteor.isClient) {
   // This code only runs on the client
 
+  //Calls to the instances in MongoDB
   Template.body.helpers({
     matches: function () {
       return Matches.find({}, {sort: {date: -1}});
@@ -198,6 +220,11 @@ if (Meteor.isClient) {
     }
   });
 
+  /*
+    - mForm1 = matchSettings Template
+    - mForm2 = newMatch Template
+    - mForm3 = ***PENDING*** Substitutes
+  */
   Template.body.events({
     'click .navig-item': function (e) {
       $('li.active').attr('class', 'navig-item');
@@ -233,6 +260,7 @@ if (Meteor.isClient) {
     $('.match-info').hide();
   });
 
+  // Hides and shows older matches info
   Template.match.events({
     'click .match-header': function (e) {
       $('.match-info').slideUp('normal');
@@ -243,6 +271,7 @@ if (Meteor.isClient) {
     }
   });
 
+  // Sorts the match lineup by P/B
   Template.match.helpers({
     foo: function (players) {
       players.sort(function (a, b) {
@@ -258,6 +287,7 @@ if (Meteor.isClient) {
     }
   });
 
+  // Here is where all the info of the form is saved to the collection
   Template.matchSettings.events({
     'submit .score-settings': function (e) {
       e.preventDefault();
@@ -320,6 +350,7 @@ if (Meteor.isClient) {
     }
   });
 
+  // Call to the selectpicker plugin
   Template.newMatch.onRendered(function () {
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
       $('.selectpicker').selectpicker('mobile');
@@ -330,6 +361,7 @@ if (Meteor.isClient) {
 
   });
 
+  // Here is where all the info of the form is saved to the collection
   Template.newMatch.events({
     'submit .new-match': function (e) {
       e.preventDefault();
@@ -467,7 +499,10 @@ if (Meteor.isClient) {
       return false;
     }
   });
-
+  
+  /* Players info Array
+    - ***Pending*** Move this information to a collection in MongoDB
+  */
   Template.newMatch.helpers({
     players: [
       {
@@ -577,6 +612,9 @@ if (Meteor.isClient) {
     ]
   });
 
+  /* Converts a inning to percentage
+    - Used in matchStats Template
+  */
   Template.registerHelper('per', function (inActual) {
     var p = $(this)[0].inActual * 100 / 9;
 
@@ -588,10 +626,16 @@ if (Meteor.isClient) {
     }
   });
 
+  /* Formats the date
+    - Used in match Template
+  */
   Template.registerHelper('formatDate', function(date) {
     return date.toLocaleDateString();
   });
 
+  /* Creates a id for the Modal based on the date 
+    - Used in match Template
+  */
   Template.registerHelper('idDate', function(date) {
     var strDate = date.toLocaleDateString();
     return (strDate.replace(/\//g, ''));
@@ -601,6 +645,9 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   });
 
+  /* Changes the number position to its name
+    - Used in match Template
+  */
   Template.registerHelper('posToName', function(pos) {
     var strPos = "";
 
