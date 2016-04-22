@@ -1,6 +1,16 @@
 <head>
   <title>San Francisco - Liga Costarricense Beisbol Máster</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-76782474-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
 </head>
 
 <body>
@@ -16,7 +26,7 @@
 	{{#if currentUser}}
 		<div class="container matchForm" id="matchForm">
 			<ul class="nav nav-pills nav-justified">
-			  <li role="presentation" class="navig-item" id="mForm1"><a href="#matchForm">Marcardor Partido</a></li>
+			  <li role="presentation" class="navig-item" id="mForm1"><a href="#matchForm">Marcardor Partido y Ajustes</a></li>
 			  <li role="presentation" class="navig-item" id="mForm2"><a href="#matchForm">Nuevo Partido</a></li>
 			  <li role="presentation" class="navig-item" id="mForm3"><a href="#matchForm">Jugadores</a></li>
 			</ul>
@@ -28,6 +38,11 @@
 			<div class="mForm2">
 				{{#each actualMatch}}
 					{{>newMatch}}
+				{{/each}}
+			</div>
+			<div class="mForm3">
+				{{#each actualMatch}}
+					{{>matchSubs}}
 				{{/each}}
 			</div>
 		</div>	
