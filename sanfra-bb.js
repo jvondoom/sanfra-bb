@@ -17,7 +17,9 @@ Meteor.methods({
       upDown: "Arriba",
       outs: 0, 
       ended: false,
-      scoreActual: 0
+      scoreActual: 0,
+      isVideo: false,
+      videoLink: ""
     });
   },
 
@@ -46,6 +48,19 @@ Meteor.methods({
       }
     });
   }, 
+
+  /* Updates the video values from 'matchValues'
+    - Used by the video-settings submit of matchSettings Template
+  */
+  'modVideo': function (idAM, ivd, lnk){
+    ActualMatch.update(
+      { _id: idAM }, 
+      {$set: {
+        isVideo: ivd,
+        videoLink: lnk
+      }
+    });
+  },
 
   /* Updates the runs from the actual inning and updates the Score
     - Used by the submit & new-half of matchSettings Template
@@ -184,7 +199,8 @@ Meteor.methods({
     ActualMatch.update({
       _id:ActualMatch.findOne({"idMV" : 0})['_id']}, 
       {$set: { 
-        "ended" : true
+        "ended" : true,
+        "isVideo": false
       }
     });
 
@@ -347,6 +363,14 @@ if (Meteor.isClient) {
       e.preventDefault();
 
       Meteor.call('modEndMatch');
+    },
+
+    'submit .video-settings': function (e) {
+      e.preventDefault();
+      var bolIsVideo = $(e.delegateTarget).find("input[type=checkbox]")[0].checked;
+      var txtLink = $(e.delegateTarget).find("input[name=link]")[0];
+
+      Meteor.call('modVideo', this._id, bolIsVideo, txtLink.value);
     }
   });
 
@@ -482,7 +506,10 @@ if (Meteor.isClient) {
         $('.new-match .row:last').after(box_html);
         box_html.fadeIn('slow');
 
-        txtPB.value = "";
+        txtPB.value = $(e.delegateTarget).find('.player-row').length;
+        if (txtPB.value > 12) {
+          txtPB.value = "";
+        }
       }
       
       return false;

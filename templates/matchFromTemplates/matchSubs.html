@@ -1,0 +1,27 @@
+<template name="matchSubs">
+	<div class="page-header">
+		<h2><small>Cambios</small></h2>
+	</div>
+	  {{#unless ended}}
+		<form class="match-subs form-inline text-center">
+			<div class="input-group">
+				<select class="selectpicker" id="prev-player">
+					<option selected disabled>Escoja el jugador</option>
+					<option value="1">1 - Lanzador</option>
+					<option value="2">2 - Receptor</option>
+					<option value="3">3 - Primera Base</option>
+				</select>
+				<span class="glico glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+				<select class="selectpicker" id="next-player">
+					<option selected disabled>Escoja el jugador</option>
+					<option value="1">1 - Lanzador</option>
+					<option value="2">2 - Receptor</option>
+					<option value="3">3 - Primera Base</option>
+				</select>
+			</div>
+		</form>    
+	  {{else}}
+	    <p>No existe ningun partido iniciado.</p>
+	  {{/unless}}
+	
+</template>
