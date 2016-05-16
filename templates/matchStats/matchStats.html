@@ -2,12 +2,12 @@
 	{{#unless ended}}
 		{{#if isVideo}}
 			<div class="video-container">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{videoLink}}?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{videoLink}}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
 			</div>
 		{{/if}}
 		<div class="progress">
 			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{per inActual}}%;">
-		    	Inn: {{inActual}} {{upDown}}
+		    	Inn: {{inActual}} {{topBottom upDown}}
 		  	</div>
 		</div>
 		<div class="outs row">

@@ -722,4 +722,14 @@ if (Meteor.isClient) {
 
     return strPos;
   });
+
+  /* Displays the part of the inning that is been played. 
+    - Used in matchStats Template
+  */
+  Template.registerHelper('topBottom', function(upDown) {
+    if (upDown == "Arriba")
+      return "Abriendo";
+    else
+      return "Cerrando";
+  });
 }
