@@ -1,0 +1,54 @@
+<template name="board">
+	<div class="container text-center">
+		<div class="jumbotron">
+			<img class="logo-img" src="/images/sf.png" alt="San Francisco">
+			<h1 class="lcbm-header">Liga Costarricense de Béisbol Máster</h1>
+			<h2>Visita de Equipos Nicaragüenses - 21 y 22 de mayo</h2>
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalVisitas">Conocer más</button>
+		</div>
+	</div>
+	<div class="modal fade" id="modalVisitas" tabindex="-1" role="dialog" aria-labelledby="modalVisitasLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-center" id="modalVisitasLabel">Visita de Equipos Nicaragüenses</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<h3>Sábado 21 de Mayo</h3>
+						<h4>La Sabána</h4><a href="#" class="show-hide1">Ver Mapa</a>
+						<div class="map1">
+							<div id="map-sabana"></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2"><p>10:00 a.m.</p></div><div class="col-sm-3"><p>Horcones vs Astros</p></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2"><p>1:00 p.m.</p></div><div class="col-sm-3"><p>Horcones vs Veteranos</p></div>
+						</div>
+						<h4>Estadio de Béisbol Antonio Escarré Cruxent</h4><a href="#" class="show-hide2">Ver Mapa</a>
+						<div class="map2">
+							<div id="map-estadio"></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2"><p>10:00 a.m.</p></div><div class="col-sm-3"><p>Las Viejas Glorias del Béisbol Rivense vs San Francisco<sup>*</sup></p></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2"><p>1:00 p.m.</p></div><div class="col-sm-3"><p>Las Viejas Glorias del Béisbol Rivense vs Marlins</p></div>
+						</div>
+						<h3>Domingo 22 de Mayo</h3>
+						<h4>Estadio de Béisbol Antonio Escarré Cruxent</h4>
+						<div class="row">
+							<div class="col-sm-2"><p>9:00 a.m.</p></div><div class="col-sm-3"><p>Combinado Nicaragüense vs Combinado Costarricense<sup>*</sup></p></div>
+						</div>
+						<p><sup>*</sup>Partido transmitido en vivo (por Internet)</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>			

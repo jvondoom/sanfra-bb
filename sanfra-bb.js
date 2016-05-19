@@ -732,4 +732,54 @@ if (Meteor.isClient) {
     else
       return "Cerrando";
   });
+
+  Template.board.onRendered(function () {
+    $('.map1').hide();
+    $('.map2').hide();
+  })
+
+  Template.board.events({
+    'click .show-hide1': function (e) {
+      e.preventDefault();
+      $('.map1').show();
+
+      var myCenter = new google.maps.LatLng(9.934146, -84.107030);
+
+      var mapProp = {
+        center: myCenter,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      var map = new google.maps.Map(document.getElementById("map-sabana"),
+      mapProp);
+      var marker = new google.maps.Marker({
+        position: myCenter,
+      });
+      marker.setMap(map);
+
+      $('.show-hide1').hide();
+    },
+    'click .show-hide2': function (e) {
+      e.preventDefault();
+      $('.map2').show();
+
+      var myCenter = new google.maps.LatLng(9.922781,-84.077378);
+
+      var mapProp = {
+        center: myCenter,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      var map = new google.maps.Map(document.getElementById("map-estadio"),
+      mapProp);
+      var marker = new google.maps.Marker({
+        position: myCenter,
+      });
+      marker.setMap(map);
+
+      $('.show-hide2').hide();
+    },
+  });
 }

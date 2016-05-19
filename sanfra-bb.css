@@ -201,3 +201,19 @@ a:hover, a:focus {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+.map1 {
+  width:500px;
+  height:380px;
+}
+.map2 {
+  width:500px;
+  height:380px;
+}
+#map-sabana {
+  width:500px;
+  height:380px;
+}
+#map-estadio {
+  width:500px;
+  height:380px;
+}
