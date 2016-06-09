@@ -1,4 +1,13 @@
 /* CSS declarations go here */
+@media only screen and (max-width: 599px) {
+	.header-team {
+		font-size: 75%;
+	}
+	.header-score {
+		font-size: 85%;
+	}
+}
+
 html {
 	height: 100%;
 }

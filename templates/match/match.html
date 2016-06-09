@@ -1,7 +1,16 @@
 <template name="match">
 	<div class="match">
 		<div class="match-header">
-			<h3 class="text-center">[{{formatDate date}}] {{teamHome}} {{totalScoreHome}} - {{teamVisit}} {{totalScoreVisit}}</h3>
+			<h3 class="">
+				<div class="row">
+					<div class="col-md-offset-6 col-xs-offset-4 col-xs-4"><span class="header-date">{{formatDate date}}</span></div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-2 col-xs-offset-1 col-xs-3"><span class="header-team">{{teamHome}}</span></div>
+					<div class="col-xs-2"><span class="header-score">{{totalScoreHome}}</span></div>
+					<div class="col-xs-4 col-md-3"><span class="header-team">{{teamVisit}}</span></div>
+					<div class="col-xs-2"><span class="header-score">{{totalScoreVisit}}</span></div>
+				</div></h3>
 		</div>
 		<div class=" {{#if ended}}
 		    match-info
