@@ -672,6 +672,10 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   });
 
+  Template.registerHelper('runsDif', function (CA, CR) {
+    return CA - CR;
+  });
+
   /* Changes the number position to its name
     - Used in match Template
   */
