@@ -672,6 +672,9 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   });
 
+  /* Calculates the difference between runs hits minus received.
+    - Used in table Template
+  */
   Template.registerHelper('runsDif', function (CA, CR) {
     return CA - CR;
   });
