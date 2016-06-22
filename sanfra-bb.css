@@ -169,6 +169,10 @@ a:hover, a:focus {
 	padding-top: 5px;
 }
 
+.match-header .header-text{
+	text-decoration: underline;
+}
+
 .match-info {
 	background: #dfdfdf;
 	height: 80%;
