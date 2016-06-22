@@ -20,9 +20,13 @@
 </head>
 
 <body>
-
-	{{>navigation }}
-	{{>title}}
+	<div class="hidden-xs">
+		{{>navigation}}
+		{{>title}}
+	</div>
+	<div class="visible-xs-block">
+		{{>navigationXS}}
+	</div>
 	{{>table}}
 
 

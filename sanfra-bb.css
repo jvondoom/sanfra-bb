@@ -6,6 +6,9 @@
 	.header-score {
 		font-size: 85%;
 	}
+	.header-text {
+		font-size: 85%;
+	}
 }
 
 html {
@@ -22,14 +25,19 @@ body {
 
 }
 
+.navbar-brand > img {
+	height: 27px;
+}
+
 .logo {
 	padding-top: 2%;
-	margin-bottom: 5%;
+	margin-bottom: 3%;
 }
 
 .logo-img {
-	height: 375px;
-	margin: 0 13%;
+	height: 275px;
+	margin: 2% 0;
+	padding-left: 1%;
 }
 
 .lcbm-header {
@@ -51,7 +59,7 @@ body {
 }
 
 .table-league {
-	margin-bottom: 5%;
+	margin-bottom: 3%;
 }
 .table-league .btn {
 	background-color: #fd5a1e;
